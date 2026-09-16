@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-PUBLIC-PROJECT-COMPARISON",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define an evidence-complete offline comparison matrix for public agent workflow projects without creating runtime dependencies.",
+  "scope": ["candidate identity", "exact revision", "license", "maintenance evidence", "persistence model", "human-intervention boundary", "AWG delta"],
+  "assumptions": ["Public documentation and repository metadata are evidence sources", "A comparison is not an integration claim"],
+  "unknowns": ["Maintenance status changes and must be refreshed at review time"],
+  "state_variables": ["candidate", "identity evidence", "license evidence", "maintenance evidence", "workflow evidence", "comparison disposition"],
+  "transitions": ["candidate -> identified", "identified -> licensed", "licensed -> maintained", "maintained -> workflow-described", "workflow-described -> compared"],
+  "invariants": ["Every compared candidate has an exact revision and license evidence", "Maintenance and human-intervention claims cite dated public evidence", "Missing evidence prevents comparison completion", "The matrix does not imply live integration"],
+  "acceptance_predicates": ["LangGraph, AutoGen or Microsoft Agent Framework, OpenHands, and SWE-agent can each be represented", "Each row requires all mandatory evidence fields", "A stale or missing evidence field fails closed", "AWG additions are separated from project capabilities"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/public-project-comparison.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/public-project-comparison.json"], "scope": "offline public-project evidence lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["candidate", "identified", "licensed", "maintained", "workflow-described", "compared"], "initial": "candidate", "transitions": [{"from": "candidate", "to": "identified"}, {"from": "identified", "to": "licensed"}, {"from": "licensed", "to": "maintained"}, {"from": "maintained", "to": "workflow-described"}, {"from": "workflow-described", "to": "compared"}], "forbidden_transitions": [{"from": "candidate", "to": "compared"}, {"from": "identified", "to": "compared"}]}}
+}

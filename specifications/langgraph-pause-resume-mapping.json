@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-LANGGRAPH-PAUSE-RESUME-MAPPING",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define an optional offline mapping between AWG decision packets and LangGraph-style interrupt/checkpoint pause and resume semantics.",
+  "scope": ["synthetic interrupt", "checkpoint identity", "AWG request packet", "oracle decision", "resume context", "privacy boundary"],
+  "assumptions": ["The mapping is conceptual and does not add a LangGraph dependency to AWG core", "Synthetic checkpoints contain no private transcript data"],
+  "unknowns": ["Framework-specific serialization and runtime behavior require a separate integration study"],
+  "state_variables": ["graph execution identity", "checkpoint", "interrupt payload", "AWG decision record", "resume disposition"],
+  "transitions": ["running -> checkpointed", "checkpointed -> interrupted", "interrupted -> packet-created", "packet-created -> oracle-decision", "oracle-decision -> resumed", "resumed -> completed"],
+  "invariants": ["Resume binds to the same execution and checkpoint identity", "An interrupt creates a decision request but does not authorize execution", "The mapping preserves AWG privacy and revision checks", "No framework behavior is claimed from this conceptual mapping alone"],
+  "acceptance_predicates": ["A synthetic interrupt produces one bounded AWG packet", "A stale checkpoint or decision is rejected", "Resume requires a matching decision identity", "The mapping remains optional and offline"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/langgraph-pause-resume-mapping.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/langgraph-pause-resume-mapping.json"], "scope": "offline optional pause and resume mapping", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["running", "checkpointed", "interrupted", "packet-created", "oracle-decision", "resumed", "completed"], "initial": "running", "transitions": [{"from": "running", "to": "checkpointed"}, {"from": "checkpointed", "to": "interrupted"}, {"from": "interrupted", "to": "packet-created"}, {"from": "packet-created", "to": "oracle-decision"}, {"from": "oracle-decision", "to": "resumed"}, {"from": "resumed", "to": "completed"}], "forbidden_transitions": [{"from": "running", "to": "completed"}, {"from": "interrupted", "to": "completed"}, {"from": "packet-created", "to": "completed"}]}}
+}

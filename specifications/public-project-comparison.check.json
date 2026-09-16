@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-PUBLIC-PROJECT-COMPARISON",
+  "spec_version": 1,
+  "artifact_digest": "sha256:e54522f661d0a7981c405a96141eb4ad47deb00c8c2021ad9ecd3485acfb7f6f",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["mandatory comparison evidence lifecycle", "fail-closed missing evidence boundary", "no integration implication"],
+  "checked_at": "2026-09-17T00:10:00Z",
+  "evidence_digest": "sha256:e54522f661d0a7981c405a96141eb4ad47deb00c8c2021ad9ecd3485acfb7f6f",
+  "scope": "offline public-project evidence lifecycle",
+  "limitations": ["Public maintenance evidence must be refreshed when the comparison is used."]
+}

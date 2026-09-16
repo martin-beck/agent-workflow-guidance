@@ -42,6 +42,16 @@ jobs:
           python -m json.tool specifications/guidance-evaluation-plan.check.json >/dev/null
           python -m json.tool specifications/clarification-regret-gate.json >/dev/null
           python -m json.tool specifications/clarification-regret-gate.check.json >/dev/null
+          python -m json.tool specifications/calibration-dimensions.json >/dev/null
+          python -m json.tool specifications/calibration-dimensions.check.json >/dev/null
+          python -m json.tool specifications/mixed-initiative-feedback.json >/dev/null
+          python -m json.tool specifications/mixed-initiative-feedback.check.json >/dev/null
+          python -m json.tool specifications/bounded-authority.json >/dev/null
+          python -m json.tool specifications/bounded-authority.check.json >/dev/null
+          python -m json.tool specifications/public-project-comparison.json >/dev/null
+          python -m json.tool specifications/public-project-comparison.check.json >/dev/null
+          python -m json.tool specifications/langgraph-pause-resume-mapping.json >/dev/null
+          python -m json.tool specifications/langgraph-pause-resume-mapping.check.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -52,6 +62,11 @@ jobs:
           python tools/check_spec.py specifications/coordinator-evidence-binding.json --result specifications/coordinator-evidence-binding.check.json
           python tools/check_spec.py specifications/guidance-evaluation-plan.json --result specifications/guidance-evaluation-plan.check.json
           python tools/check_spec.py specifications/clarification-regret-gate.json --result specifications/clarification-regret-gate.check.json
+          python tools/check_spec.py specifications/calibration-dimensions.json --result specifications/calibration-dimensions.check.json
+          python tools/check_spec.py specifications/mixed-initiative-feedback.json --result specifications/mixed-initiative-feedback.check.json
+          python tools/check_spec.py specifications/bounded-authority.json --result specifications/bounded-authority.check.json
+          python tools/check_spec.py specifications/public-project-comparison.json --result specifications/public-project-comparison.check.json
+          python tools/check_spec.py specifications/langgraph-pause-resume-mapping.json --result specifications/langgraph-pause-resume-mapping.check.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle

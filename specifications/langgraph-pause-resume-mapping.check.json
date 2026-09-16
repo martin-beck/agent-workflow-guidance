@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-LANGGRAPH-PAUSE-RESUME-MAPPING",
+  "spec_version": 1,
+  "artifact_digest": "sha256:8ef01c62a15e4e7e77f388d2f99c447ffe989e1b491003e02d385ef61d4482b5",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["interrupt-to-packet mapping", "checkpoint and decision identity", "optional privacy-safe resume"],
+  "checked_at": "2026-09-17T00:10:00Z",
+  "evidence_digest": "sha256:8ef01c62a15e4e7e77f388d2f99c447ffe989e1b491003e02d385ef61d4482b5",
+  "scope": "offline optional pause and resume mapping",
+  "limitations": ["This conceptual check does not validate any LangGraph runtime or serialization implementation."]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BOUNDED-AUTHORITY",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify bounded delegation, oracle control, expiry, rejection power, and post-decision evidence obligations.",
+  "scope": ["authority scope", "decision expiry", "oracle context", "rejection power", "audit evidence"],
+  "assumptions": ["An approval is valid only for a declared task and scope", "The Coordinator can compare approval identity and expiry"],
+  "unknowns": ["The appropriate scope granularity depends on project risk"],
+  "state_variables": ["task scope", "authority expiry", "decision context", "oracle disposition", "audit record"],
+  "transitions": ["packet -> scoped", "scoped -> approved", "scoped -> rejected", "scoped -> expired", "approved -> audited", "rejected -> audited", "expired -> audited"],
+  "invariants": ["Approval cannot exceed declared authority scope", "Expired or rejected authority cannot authorize execution", "The oracle receives alternatives, consequences, and rejection power", "Every disposition creates auditable evidence"],
+  "acceptance_predicates": ["Out-of-scope approval is rejected", "Expired approval is rejected", "A rejection remains distinct from an approval", "Audit evidence binds task identity, scope, response, and expiry"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/bounded-authority.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/bounded-authority.json"], "scope": "offline authority and audit lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["packet", "scoped", "approved", "rejected", "expired", "audited"], "initial": "packet", "transitions": [{"from": "packet", "to": "scoped"}, {"from": "scoped", "to": "approved"}, {"from": "scoped", "to": "rejected"}, {"from": "scoped", "to": "expired"}, {"from": "approved", "to": "audited"}, {"from": "rejected", "to": "audited"}, {"from": "expired", "to": "audited"}], "forbidden_transitions": [{"from": "packet", "to": "approved"}, {"from": "rejected", "to": "approved"}, {"from": "expired", "to": "approved"}]}}
+}
