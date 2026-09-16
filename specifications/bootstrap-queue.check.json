@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BOOTSTRAP-QUEUE",
+  "spec_version": 1,
+  "artifact_digest": "sha256:2d176c8d70f0363acf63f2db64395fa5efcfd38b4e2d7d370a0b0294f0f0b3f6",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": [
+    "required specification sections are present",
+    "finite state model declares a valid initial state",
+    "all permitted and forbidden transitions reference declared states"
+  ],
+  "checked_at": "2026-09-16T12:00:00Z",
+  "evidence_digest": "sha256:8f71e90d04dd1b3b98d04fb5d63256c6bbb22f1dc14ca0916489ee84f347a3cf",
+  "scope": "finite initial queue AR-0001..AR-0026",
+  "limitations": [
+    "This initial checker validates the finite model shape; AR-0022 extends it to execute queue invariants.",
+    "No product implementation behavior is proven by this artifact."
+  ]
+}

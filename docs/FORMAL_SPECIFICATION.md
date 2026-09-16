@@ -43,4 +43,5 @@ specification is checked before AR-0001 or any successor is promoted to active
 work. Existing AWG ARs are migrated under the same rule by the follow-up ARs
 in the companion state repository.
 
-See `specifications/bootstrap-queue.json` for the initial AWG artifact.
+See `specifications/bootstrap-queue.json` for the initial AWG artifact and
+`specifications/bootstrap-queue.check.json` for its recorded autonomous check.

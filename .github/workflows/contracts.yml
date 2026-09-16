@@ -24,4 +24,5 @@ jobs:
           python -m json.tool schema/formal-check-result.schema.json >/dev/null
           python -m json.tool examples/decision-request.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.json >/dev/null
+          python -m json.tool specifications/bootstrap-queue.check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json
