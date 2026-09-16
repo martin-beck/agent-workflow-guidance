@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-OFFLINE-CONTRACTS",
+  "spec_version": 1,
+  "artifact_digest": "sha256:f763ad61bcab80411a0867370d5a22a0ba6d5e850daab1fbf4f425a856d1a9db",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py plus tools/check_contracts.py and unittest",
+  "status": "pass",
+  "properties_checked": [
+    "finite contract-validation states and forbidden transitions are structurally valid",
+    "positive request and decision-record examples pass",
+    "negative request and decision-record fixtures fail",
+    "validation uses only repository-local schemas and standard-library code"
+  ],
+  "checked_at": "2026-09-16T23:14:09Z",
+  "evidence_digest": "sha256:b01de84855e1d008cf12e8534ba1bb7d23bc0a7111df0eba694d0039ef0960b6",
+  "scope": "offline AWG request and decision-record contracts",
+  "limitations": [
+    "The checker implements the JSON Schema vocabulary used by the checked-in AWG schemas; unsupported future keywords require an explicit checker change.",
+    "A structural contract pass does not prove oracle intent, implementation behavior, or runtime safety."
+  ]
+}

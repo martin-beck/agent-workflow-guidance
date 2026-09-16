@@ -23,9 +23,17 @@ jobs:
           python -m json.tool schema/specification.schema.json >/dev/null
           python -m json.tool schema/formal-check-result.schema.json >/dev/null
           python -m json.tool examples/decision-request.json >/dev/null
+          python -m json.tool examples/decision-record.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-request.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-record.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.check.json >/dev/null
+          python -m json.tool specifications/offline-contracts.json >/dev/null
           python -m json.tool specifications/awq-enforcement.json >/dev/null
           python -m json.tool specifications/awq-enforcement.check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json
+          python tools/check_spec.py specifications/offline-contracts.json
           python tools/check_spec.py specifications/awq-enforcement.json
+          python tools/check_contracts.py examples/decision-request.json --kind request
+          python tools/check_contracts.py examples/decision-record.json --kind record
+          python -m unittest discover -s tests -v
