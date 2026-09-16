@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BROKEN",
+  "version": 1,
+  "decision_class": "conceptual",
+  "objective": "invalid formal specification fixture",
+  "scope": ["fixture"],
+  "assumptions": [],
+  "state_variables": ["state"],
+  "transitions": ["planned -> done"],
+  "invariants": ["must not skip the gate"],
+  "acceptance_predicates": ["never pass"],
+  "formalization": {"method": "state-machine", "model_ref": "fixture", "checker": "fixture", "command": ["fixture"], "scope": "fixture", "expected_result": "invariants-hold", "timeout_seconds": 0, "model": {"states": ["planned"], "initial": "planned", "transitions": [], "forbidden_transitions": []}}
+}
