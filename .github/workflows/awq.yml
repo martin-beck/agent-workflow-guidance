@@ -12,5 +12,6 @@ permissions:
 jobs:
   awq:
     uses: martin-beck/agent-workflow-quality/.github/workflows/awq-reusable.yml@fcf8df6ab7ac8d5be63400727bcf2b02fff74804
+    timeout-minutes: 10
     with:
       awq-ref: fcf8df6ab7ac8d5be63400727bcf2b02fff74804
