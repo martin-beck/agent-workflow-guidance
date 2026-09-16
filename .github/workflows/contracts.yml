@@ -1,0 +1,22 @@
+name: contracts
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  json-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m json.tool schema/decision-request.schema.json >/dev/null
+          python -m json.tool schema/decision-record.schema.json >/dev/null
+          python -m json.tool examples/decision-request.json >/dev/null

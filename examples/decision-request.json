@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1",
+  "request_id": "AWG-EXAMPLE-001",
+  "trigger": "decision",
+  "context": {
+    "task_ref": "AR-EXAMPLE",
+    "task_revision": 3,
+    "objective": "Choose a bounded migration path for an existing project",
+    "constraints": ["preserve rollback", "do not change public behavior without review"],
+    "quality_refs": ["AWQ-PRIVACY-001"],
+    "evidence_refs": ["evidence:synthetic-001"]
+  },
+  "candidates": [
+    {
+      "candidate_id": "C-INCREMENTAL",
+      "action": "Make the migration in two independently reversible steps",
+      "rank": 1,
+      "confidence": 0.78,
+      "rationale": "It limits blast radius and preserves an intermediate rollback point.",
+      "assumptions": ["the compatibility layer can remain for one release"],
+      "evidence_refs": ["evidence:synthetic-001"],
+      "tradeoffs": ["more temporary code", "slower completion"],
+      "impact": "medium",
+      "reversibility": "easy",
+      "downstream_effects": ["dependent tasks must accept the compatibility layer"],
+      "rollback": "Revert the second step, then remove the first step only after dependents migrate."
+    }
+  ]
+}
