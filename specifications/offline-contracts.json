@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-OFFLINE-CONTRACTS",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Validate AWG request and decision-record contracts deterministically without network, provider, agent, or transcript access.",
+  "scope": ["decision-request.schema.json", "decision-record.schema.json", "examples", "fixtures/broken", "tools/check_contracts.py"],
+  "assumptions": ["The repository schemas are the authoritative contract definitions", "A dependency-free checker is sufficient for the schema vocabulary used by AWG"],
+  "unknowns": ["Future schema keywords may require extending the checker before adoption"],
+  "state_variables": ["contract document", "selected schema", "validation result", "fixture expectation"],
+  "transitions": ["unread -> parsed", "parsed -> validated", "parsed -> rejected", "validated -> recorded"],
+  "invariants": ["No network or provider process is started", "Unknown schema properties are rejected", "A positive fixture passes only when all required nested contracts pass", "A negative fixture is accepted by the test suite only when validation fails"],
+  "acceptance_predicates": ["The positive decision request passes", "The invalid request fails", "The checker resolves only local schema references", "The checker emits deterministic pass/fail output", "The contracts workflow runs the checker and negative test"],
+  "formalization": {
+    "method": "state-machine",
+    "model_ref": "specifications/offline-contracts.json",
+    "checker": "tools/check_spec.py plus tools/check_contracts.py and unittest",
+    "command": ["python", "tools/check_spec.py", "specifications/offline-contracts.json"],
+    "scope": "bounded request/record validation and fixture expectations",
+    "expected_result": "invariants-hold",
+    "timeout_seconds": 60,
+    "model": {
+      "states": ["unread", "parsed", "validated", "rejected", "recorded"],
+      "initial": "unread",
+      "transitions": [{"from": "unread", "to": "parsed"}, {"from": "parsed", "to": "validated"}, {"from": "parsed", "to": "rejected"}, {"from": "validated", "to": "recorded"}],
+      "forbidden_transitions": [{"from": "unread", "to": "validated"}, {"from": "unread", "to": "recorded"}, {"from": "rejected", "to": "recorded"}]
+    }
+  }
+}

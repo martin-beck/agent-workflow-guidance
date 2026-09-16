@@ -34,6 +34,21 @@
 9. The agent implements only within the decision scope and records separate
    execution and verification evidence.
 
+## Offline contract gate
+
+The repository's request and decision-record schemas are checked without a
+provider or network dependency:
+
+```text
+python tools/check_contracts.py examples/decision-request.json --kind request
+python tools/check_contracts.py examples/decision-record.json --kind record
+python -m unittest discover -s tests -v
+```
+
+The checker resolves only local schema files and rejects malformed or
+unknown properties. The `fixtures/broken/` documents are expected failures
+used by the test suite and CI; they are not valid protocol examples.
+
 ## Overlap and failure modes
 
 - **Duplicate authority:** a task note must not be treated as the decision

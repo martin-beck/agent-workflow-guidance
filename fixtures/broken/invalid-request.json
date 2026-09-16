@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "request_id": "AWG-BROKEN-001",
+  "trigger": "decision",
+  "decision_class": "design",
+  "context": {
+    "task_ref": "fixture",
+    "task_revision": 0,
+    "objective": "synthetic invalid request",
+    "constraints": []
+  },
+  "specification": {},
+  "formal_check": {},
+  "candidates": []
+}

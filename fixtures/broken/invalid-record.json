@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "request_id": "AWG-BROKEN-002",
+  "record_id": "AWG-DEC-BROKEN-002",
+  "request_digest": "not-a-digest",
+  "oracle": {"kind": "human", "display_name": "Fixture"},
+  "disposition": "selected",
+  "selected_candidate": "C-MISSING",
+  "scope": {"task_ref": "fixture", "task_revision": 0, "authority": "implementation-choice", "conditions": []},
+  "specification": {},
+  "formal_check": {},
+  "recorded_at": "not-a-date"
+}
