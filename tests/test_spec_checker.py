@@ -29,6 +29,16 @@ class SpecificationCheckerTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("AWG-SPEC-FAIL", result.stderr)
 
+    def test_request_gate_passes_before_oracle_and_implementation(self) -> None:
+        for phase_args in (("--phase", "oracle"), ("--phase", "implementation", "--task-revision", "3")):
+            result = subprocess.run([sys.executable, str(ROOT / "tools/check_request_gate.py"), "examples/decision-request.json", *phase_args], cwd=ROOT, check=False, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_request_gate_rejects_wrong_implementation_revision(self) -> None:
+        result = subprocess.run([sys.executable, str(ROOT / "tools/check_request_gate.py"), "examples/decision-request.json", "--phase", "implementation", "--task-revision", "4"], cwd=ROOT, check=False, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("AWG-GATE-FAIL", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

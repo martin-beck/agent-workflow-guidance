@@ -31,6 +31,12 @@ The checker records compact evidence, not hidden model reasoning or private
 transcripts. See [Formal specifications](FORMAL_SPECIFICATION.md) and
 `schema/specification.schema.json`.
 
+The reference preflight is `tools/check_request_gate.py`. Run it once with
+`--phase oracle` before presentation and again with `--phase implementation
+--task-revision N` before implementation. The second invocation rejects a
+changed Coordinator task revision even when the original formal result still
+passes structurally.
+
 ## Required reasoning fields
 
 Each candidate must state:
