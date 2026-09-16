@@ -34,6 +34,11 @@
 9. The agent implements only within the decision scope and records separate
    execution and verification evidence.
 
+For Coordinator promotion, the project-owned adapter must pass the
+`AWG-SPEC-PROMOTION-GATE` specification and exact formal-check result before
+delegating the lifecycle mutation to Coordinator. The adapter is a preflight
+boundary; Coordinator remains the sole authority that changes task state.
+
 ## Offline contract gate
 
 The repository's request and decision-record schemas are checked without a
