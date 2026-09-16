@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-GUIDANCE-EVALUATION-PLAN",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define a bounded offline synthetic evaluation of guidance quality, oracle effort, rework, dependent-task impact, calibration, and inappropriate autonomy.",
+  "scope": ["synthetic decision tasks", "oracle packet effort", "dependent-task outcomes", "calibration measures"],
+  "assumptions": ["No provider or private transcript is required", "Synthetic task outcomes can represent bounded downstream impact"],
+  "unknowns": ["Effect sizes require later empirical study"],
+  "state_variables": ["task scenario", "agent recommendation", "oracle intervention", "outcome", "dependent-task impact"],
+  "transitions": ["scenario -> recommendation", "recommendation -> oracle-intervention", "recommendation -> autonomous-action", "oracle-intervention -> outcome", "autonomous-action -> outcome"],
+  "invariants": ["Oracle effort is measured separately from task outcome", "Intervention evidence is not implementation evidence", "Synthetic results do not claim deployment safety"],
+  "acceptance_predicates": ["Each measure has an operational definition", "The study has a bounded scenario count and no network access", "Calibration dimensions remain separate", "Negative cases include inappropriate autonomy"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/guidance-evaluation-plan.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/guidance-evaluation-plan.json"], "scope": "offline synthetic evaluation lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["scenario", "recommendation", "oracle-intervention", "autonomous-action", "outcome"], "initial": "scenario", "transitions": [{"from": "scenario", "to": "recommendation"}, {"from": "recommendation", "to": "oracle-intervention"}, {"from": "recommendation", "to": "autonomous-action"}, {"from": "oracle-intervention", "to": "outcome"}, {"from": "autonomous-action", "to": "outcome"}], "forbidden_transitions": [{"from": "scenario", "to": "outcome"}]}}
+}

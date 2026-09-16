@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CLARIFICATION-REGRET-GATE",
+  "spec_version": 1,
+  "artifact_digest": "sha256:dcb5c0d6275831d3dc2321e0f878fe18a03d3d99a9c37180e915a617b6a52e2e",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["clarification lifecycle is finite", "high-confidence ambiguity cannot directly act in the model"],
+  "checked_at": "2026-09-16T23:52:30Z",
+  "evidence_digest": "sha256:efd02c7a2d3ed8f3216aaec3953079d7ecdaa5df8f46581fe36059990c4e92a3",
+  "scope": "expected-regret clarification gate",
+  "limitations": ["Threshold values require later empirical calibration."]
+}
