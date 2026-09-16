@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-PROMOTION-GATE",
+  "spec_version": 1,
+  "artifact_digest": "sha256:4992880e7f1c226c17af61ff74d88393cf4ac62d0038f107b4bc58baedbf6f2c",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py plus state-repository promotion adapter tests",
+  "status": "pass",
+  "properties_checked": [
+    "promotion preflight states are finite and reject direct candidate-to-promotion transitions",
+    "the formal specification is structurally valid and digest-bound"
+  ],
+  "checked_at": "2026-09-16T23:29:48Z",
+  "evidence_digest": "sha256:869a5653b90841ed2143069ea9e2c710e9a562468cf47b64d4c0eb8e3765911b",
+  "scope": "AWG promotion-gate design",
+  "limitations": [
+    "The project adapter does not replace or modify upstream Coordinator authority.",
+    "A passing formal model does not prove the implementation or hosted branch settings."
+  ]
+}

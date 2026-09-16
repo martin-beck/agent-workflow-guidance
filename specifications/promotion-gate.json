@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-PROMOTION-GATE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Prevent a design or conceptual AR from entering Coordinator promotion without an exact, passing formal specification result.",
+  "scope": ["project-owned promotion adapter", "Coordinator planned-to-open transition", "design and conceptual AR metadata"],
+  "assumptions": ["Coordinator remains authoritative for task lifecycle mutation", "The product formal checker is available locally and uses no network", "Operational ARs may use the lighter bounded specification path"],
+  "unknowns": ["An upstream Coordinator hook may later replace the project adapter"],
+  "state_variables": ["task decision class", "task revision", "specification reference and digest", "formal-check reference and status", "promotion result"],
+  "transitions": ["candidate -> evidence_checked", "evidence_checked -> coordinator_promoted", "candidate -> rejected", "evidence_checked -> rejected"],
+  "invariants": ["Design/conceptual promotion requires a specification reference", "The specification digest is computed from the referenced artifact", "The formal check binds to the same specification identity, version, method, and task revision", "Missing, stale, failed, timed-out, or inconclusive evidence rejects promotion", "The adapter never mutates Coordinator state directly"],
+  "acceptance_predicates": ["A valid design/conceptual task reaches Coordinator promote only after all evidence checks pass", "A missing specification is rejected", "A stale digest is rejected", "A non-pass formal result is rejected", "An operational task follows the bounded operational path", "Coordinator remains the only lifecycle writer"],
+  "formalization": {
+    "method": "state-machine",
+    "model_ref": "specifications/promotion-gate.json",
+    "checker": "tools/check_spec.py plus state-repository promotion adapter tests",
+    "command": ["python", "tools/check_spec.py", "specifications/promotion-gate.json"],
+    "scope": "bounded preflight states for one task and one promotion attempt",
+    "expected_result": "invariants-hold",
+    "timeout_seconds": 60,
+    "model": {
+      "states": ["candidate", "evidence_checked", "coordinator_promoted", "rejected"],
+      "initial": "candidate",
+      "transitions": [{"from": "candidate", "to": "evidence_checked"}, {"from": "evidence_checked", "to": "coordinator_promoted"}, {"from": "candidate", "to": "rejected"}, {"from": "evidence_checked", "to": "rejected"}],
+      "forbidden_transitions": [{"from": "candidate", "to": "coordinator_promoted"}, {"from": "rejected", "to": "coordinator_promoted"}]
+    }
+  }
+}
