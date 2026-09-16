@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-GUIDANCE-EVALUATION-PLAN",
+  "spec_version": 1,
+  "artifact_digest": "sha256:c86a9f7af1c585f2b524e092b62a39d9e2dbd17dd62016f12202150dde37e9fe",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["bounded evaluation lifecycle", "separate evidence and intervention invariants"],
+  "checked_at": "2026-09-16T23:52:30Z",
+  "evidence_digest": "sha256:56467126ed4958ca1b6d04043ebd4b9dd10d93a83470f107db9b8f79bb8b0739",
+  "scope": "synthetic guidance evaluation",
+  "limitations": ["Synthetic results do not establish deployment safety or causal effect sizes."]
+}

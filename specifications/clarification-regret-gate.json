@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CLARIFICATION-REGRET-GATE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Require clarification when unresolved ambiguity and expected downstream regret exceed bounded intervention cost.",
+  "scope": ["clarification trigger", "expected regret", "intervention cost", "high-confidence ambiguity fixtures"],
+  "assumptions": ["The agent can enumerate at least two plausible interpretations", "Clarification cost is bounded and observable"],
+  "unknowns": ["Threshold calibration requires empirical evaluation"],
+  "state_variables": ["ambiguity", "applicability confidence", "expected regret", "intervention cost", "clarification disposition"],
+  "transitions": ["observed -> alternatives", "alternatives -> scored", "scored -> clarify", "scored -> act", "clarify -> resolved"],
+  "invariants": ["High confidence cannot suppress material unresolved ambiguity", "Expected regret includes dependent-task impact", "A clarification request does not authorize implementation"],
+  "acceptance_predicates": ["The trigger is deterministic for equal inputs", "A high-confidence ambiguous fixture requests clarification", "A low-regret fixture may act", "All threshold assumptions are recorded"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/clarification-regret-gate.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/clarification-regret-gate.json"], "scope": "bounded clarification decision lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["observed", "alternatives", "scored", "clarify", "act", "resolved"], "initial": "observed", "transitions": [{"from": "observed", "to": "alternatives"}, {"from": "alternatives", "to": "scored"}, {"from": "scored", "to": "clarify"}, {"from": "scored", "to": "act"}, {"from": "clarify", "to": "resolved"}], "forbidden_transitions": [{"from": "observed", "to": "act"}, {"from": "clarify", "to": "act"}]}}
+}
