@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BOOTSTRAP-QUEUE",
+  "version": 1,
+  "decision_class": "conceptual",
+  "objective": "Create a dependency-aware initial AR topology for AWG without opening work that violates the project authority boundaries.",
+  "scope": ["AR-0001 through AR-0020", "Coordinator state transitions", "AWG and AWQ ownership boundaries"],
+  "assumptions": ["Coordinator remains authoritative for task lifecycle", "AWQ remains authoritative for quality policy", "oracle decisions are not implementation evidence"],
+  "unknowns": ["The first executable formal checker implementation is not yet selected"],
+  "state_variables": ["task status", "dependency edges", "task revision", "authority owner", "specification and check status"],
+  "transitions": ["planned -> open only when dependencies and specification gate are satisfied", "open -> in_progress only through Coordinator claim", "in_progress -> done only after implementation and verification evidence"],
+  "invariants": ["No task has an unknown dependency", "No active task has more than one owner", "No conceptual task is promoted without a specification reference", "AWG never substitutes oracle approval for quality or implementation evidence"],
+  "acceptance_predicates": ["Coordinator doctor reports consistent structure and live state", "Every initial conceptual AR references this bootstrap specification", "Generated views contain no duplicate or cyclic dependency"],
+  "formalization": {"method": "state-machine", "model_ref": "docs/FORMAL_SPECIFICATION.md#ar-bootstrap-rule", "checker": "Agent Workflow Coordinator doctor plus AWG specification validator", "command": ["tools/handoffctl", "doctor", "--live"], "scope": "finite initial queue AR-0001..AR-0026", "expected_result": "invariants-hold", "timeout_seconds": 1800, "model": {"states": ["planned", "open", "in_progress", "done"], "initial": "planned", "transitions": [{"from": "planned", "to": "open"}, {"from": "open", "to": "in_progress"}, {"from": "in_progress", "to": "done"}], "forbidden_transitions": [{"from": "planned", "to": "in_progress"}, {"from": "planned", "to": "done"}]}}
+}

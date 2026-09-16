@@ -1,7 +1,8 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "request_id": "AWG-EXAMPLE-001",
   "trigger": "decision",
+  "decision_class": "design",
   "context": {
     "task_ref": "AR-EXAMPLE",
     "task_revision": 3,
@@ -9,6 +10,35 @@
     "constraints": ["preserve rollback", "do not change public behavior without review"],
     "quality_refs": ["AWQ-PRIVACY-001"],
     "evidence_refs": ["evidence:synthetic-001"]
+  },
+  "specification": {
+    "schema_version": "0.2",
+    "spec_id": "AWG-SPEC-EXAMPLE-MIGRATION",
+    "version": 1,
+    "decision_class": "design",
+    "objective": "Choose a migration path that preserves rollback and compatibility.",
+    "scope": ["migration plan", "dependent tasks"],
+    "assumptions": ["the compatibility layer can remain for one release"],
+    "unknowns": [],
+    "state_variables": ["migration phase", "compatibility status"],
+    "transitions": ["unmigrated -> compatibility -> migrated"],
+    "invariants": ["rollback remains available before dependent migration"],
+    "acceptance_predicates": ["each phase has a tested rollback"],
+    "formalization": {"method": "state-machine", "model_ref": "examples/decision-request.json", "checker": "synthetic-state-checker", "command": ["synthetic-state-checker", "--spec", "examples/decision-request.json"], "scope": "three migration states", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["unmigrated", "compatibility", "migrated"], "initial": "unmigrated", "transitions": [{"from": "unmigrated", "to": "compatibility"}, {"from": "compatibility", "to": "migrated"}], "forbidden_transitions": [{"from": "unmigrated", "to": "migrated"}]}}
+  },
+  "formal_check": {
+    "schema_version": "0.2",
+    "spec_id": "AWG-SPEC-EXAMPLE-MIGRATION",
+    "spec_version": 1,
+    "artifact_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "method": "state-machine",
+    "checker": "synthetic-state-checker",
+    "status": "pass",
+    "properties_checked": ["rollback remains available before dependent migration", "each phase has a tested rollback"],
+    "checked_at": "2026-09-16T00:00:00Z",
+    "evidence_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "scope": "three migration states",
+    "limitations": ["Synthetic example only; no implementation was executed."]
   },
   "candidates": [
     {

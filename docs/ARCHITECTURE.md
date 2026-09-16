@@ -15,6 +15,14 @@ AWG has five conceptual records:
 5. **Decision record** — the final authority-bearing result, scope, conditions,
    expiry, reusable guidance, and links to implementation evidence.
 
+Every AWG decision has a sixth required artifact: a **formal specification**.
+For design and conceptual decisions this is a hard gate, including the
+decision to create or restructure the first AR queue of a new project. The
+specification states the objective, assumptions, state/transition model,
+invariants, acceptance predicates, and the autonomous checker that evaluates
+them. An oracle must not select a design candidate whose specification has not
+passed its declared checks.
+
 The record is append-only from the protocol's perspective. Corrections are
 new records that supersede an earlier decision; they never rewrite history.
 The decision digest binds the canonical request, candidates, response, and
@@ -44,3 +52,8 @@ and quality-gate results. AWG contributes the decision and guidance records.
 
 No project may infer an approval merely because a task is claimed, a quality
 check is green, or an agent has a high confidence score.
+
+Formal checking does not prove arbitrary implementation correctness. It proves
+only the declared model and predicates within the declared method and scope.
+The decision record must preserve that boundary and keep implementation,
+quality, and runtime evidence separate.

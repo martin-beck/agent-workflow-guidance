@@ -20,4 +20,8 @@ jobs:
           set -euo pipefail
           python -m json.tool schema/decision-request.schema.json >/dev/null
           python -m json.tool schema/decision-record.schema.json >/dev/null
+          python -m json.tool schema/specification.schema.json >/dev/null
+          python -m json.tool schema/formal-check-result.schema.json >/dev/null
           python -m json.tool examples/decision-request.json >/dev/null
+          python -m json.tool specifications/bootstrap-queue.json >/dev/null
+          python tools/check_spec.py specifications/bootstrap-queue.json

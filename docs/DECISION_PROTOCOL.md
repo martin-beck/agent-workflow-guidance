@@ -4,6 +4,33 @@ The first version is intentionally transport-neutral. JSON Schema files define
 the public shape; a future CLI or UI may carry these records over files,
 Coordinator events, or another reviewed adapter.
 
+## Mandatory specification gate
+
+Every AWG request carries a machine-readable specification. A request whose
+decision class is `design` or `conceptual` cannot be sent to the oracle until
+the specification passes its autonomous checks. The same rule applies when a
+new project is bootstrapped: the initial AR-task topology is a conceptual
+decision and must have a specification before the first AR is opened.
+
+The specification must include:
+
+- objective and scope;
+- explicit assumptions and unknowns;
+- state variables and permitted transitions;
+- invariants that must hold in every represented state;
+- acceptance predicates for the intended outcome;
+- formalization method, model reference, checker command, and bounded scope;
+- expected checker result and a content digest of the checked artifact.
+
+The autonomous checker runs before oracle presentation and again before
+implementation begins if task revision, repository head, policy lock, or
+specification digest changes. A failed, missing, stale, or inconclusive check
+causes a fail-closed stop; it may not be overridden by an oracle approval.
+
+The checker records compact evidence, not hidden model reasoning or private
+transcripts. See [Formal specifications](FORMAL_SPECIFICATION.md) and
+`schema/specification.schema.json`.
+
 ## Required reasoning fields
 
 Each candidate must state:
@@ -36,4 +63,6 @@ use it to avoid asking a duplicate question only after checking those fields
 against the current task and policy.
 
 See `schema/decision-request.schema.json` and
-`schema/decision-record.schema.json` for the initial contract.
+`schema/decision-record.schema.json` for the decision contract, and
+`schema/specification.schema.json` plus
+`schema/formal-check-result.schema.json` for the formal gate.

@@ -23,6 +23,8 @@ the provenance model.
   oracle make the final selection;
 - record a tamper-evident, privacy-safe decision that can be cited by future
   tasks as guidance;
+- express every design/conceptual decision as a formally checkable
+  specification and require an autonomous check before oracle selection;
 - keep the human's authority explicit: a recommendation is not an approval,
   and an approval is not evidence that implementation succeeded.
 

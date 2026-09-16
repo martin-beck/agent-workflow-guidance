@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/martin-beck/agent-workflow-guidance/schema/formal-check-result.schema.json",
+  "title": "AWG autonomous formal-check result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "spec_id", "spec_version", "artifact_digest", "method", "checker", "status", "properties_checked", "checked_at", "evidence_digest"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "spec_id": {"type": "string", "pattern": "^AWG-SPEC-[A-Z0-9-]+$"},
+    "spec_version": {"type": "integer", "minimum": 1},
+    "artifact_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "method": {"enum": ["json-schema", "state-machine", "tlaplus", "smtlib", "alloy"]},
+    "checker": {"type": "string", "minLength": 1},
+    "status": {"enum": ["pass", "fail", "timeout", "inconclusive", "stale"]},
+    "properties_checked": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "evidence_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "scope": {"type": "string"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

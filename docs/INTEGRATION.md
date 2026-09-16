@@ -21,15 +21,17 @@
    approval is a mandatory gate even when the agent is confident.
 4. AWG creates one or more decision items, ranks alternatives, and records
    confidence, impact, reversibility, and dependent-task consequences.
-5. Independent items may be batched into one oracle packet. Each item retains
+5. AWG creates and autonomously checks the formal specification for each
+   design/conceptual item. A failed or missing check stops the flow.
+6. Independent items may be batched into one oracle packet. Each item retains
    its own status and response.
-6. The human answers, rejects all candidates, asks for more evidence, or adds
+7. The human answers, rejects all candidates, asks for more evidence, or adds
    a proposal. Added proposals are evaluated before the human selects the
    final option.
-7. AWG appends the final decision and reusable guidance. The Coordinator
+8. AWG appends the final decision and reusable guidance. The Coordinator
    records the task event and revision-bound reference; AWQ validates the
    record shape and required evidence class.
-8. The agent implements only within the decision scope and records separate
+9. The agent implements only within the decision scope and records separate
    execution and verification evidence.
 
 ## Overlap and failure modes

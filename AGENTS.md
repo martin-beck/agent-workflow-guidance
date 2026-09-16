@@ -9,6 +9,13 @@ updated decision record or migration note, and a review of privacy,
 provenance, authority, replay, and dependent-task effects. Do not claim that
 an oracle decision proves implementation correctness.
 
+Every design or conceptual decision must have a versioned specification with
+invariants, acceptance predicates, and a declared formal checker. Run that
+checker autonomously before presenting candidates to the oracle and again
+before implementation if the bound revision, policy, or specification
+changes. Missing, stale, failed, timed-out, or inconclusive checks are
+fail-closed conditions.
+
 Do not add runtime network access, floating versions, credentials, private
 paths, raw prompts, raw transcripts, or unbounded evidence. Commands in future
 adapters must be argument arrays with finite deadlines and content-minimized

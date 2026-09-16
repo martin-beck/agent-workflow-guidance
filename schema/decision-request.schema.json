@@ -4,12 +4,15 @@
   "title": "AWG decision request",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "request_id", "trigger", "context", "candidates"],
+  "required": ["schema_version", "request_id", "trigger", "decision_class", "context", "specification", "formal_check", "candidates"],
   "properties": {
-    "schema_version": {"const": "0.1"},
+    "schema_version": {"const": "0.2"},
     "request_id": {"type": "string", "pattern": "^AWG-[A-Z0-9-]+$"},
     "trigger": {"enum": ["clarification", "decision", "guidance", "mandatory-approval", "recovery"]},
+    "decision_class": {"enum": ["design", "conceptual", "operational"]},
     "context": {"$ref": "#/$defs/context"},
+    "specification": {"$ref": "specification.schema.json"},
+    "formal_check": {"$ref": "formal-check-result.schema.json"},
     "candidates": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/candidate"}},
     "batch_key": {"type": "string", "minLength": 1},
     "oracle_deadline": {"type": "string", "format": "date-time"}
