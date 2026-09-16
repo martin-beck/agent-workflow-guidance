@@ -45,3 +45,17 @@ in the companion state repository.
 
 See `specifications/bootstrap-queue.json` for the initial AWG artifact and
 `specifications/bootstrap-queue.check.json` for its recorded autonomous check.
+
+## Self-hosting rule
+
+After the initial formal gates are complete, AWG applies this workflow to its
+own evolution. AWG design changes, schema changes, formal-checker changes,
+Coordinator/AWQ integrations, and release-policy changes require their own
+specification, autonomous check, oracle decision where applicable, and
+independent implementation/quality evidence.
+
+The bootstrap specification and checker form the finite initial seed. Changes
+to that seed or to the self-hosting rule require a successor specification;
+this recursion boundary prevents an unbounded bootstrap loop while preserving
+formal governance of the governance mechanism itself. See AR-0028 in the
+companion coordination repository.
