@@ -25,4 +25,7 @@ jobs:
           python -m json.tool examples/decision-request.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.check.json >/dev/null
+          python -m json.tool specifications/awq-enforcement.json >/dev/null
+          python -m json.tool specifications/awq-enforcement.check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json
+          python tools/check_spec.py specifications/awq-enforcement.json

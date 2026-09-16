@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-AWQ-ENFORCEMENT",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Ensure every proposed or published AWG repository change is evaluated by the pinned Agent Workflow Quality policy.",
+  "scope": ["pull requests", "pushes to main", "quality/awq.json", "quality/awq.lock.json", "AWQ reusable workflow invocation"],
+  "assumptions": ["AWQ source is checked out at an immutable full commit SHA", "AWQ checks remain offline and deterministic after source checkout", "branch protection is configured separately from repository source"],
+  "unknowns": ["Whether GitHub branch protection currently marks the AWQ job required"],
+  "state_variables": ["quality policy revision", "consumer tree revision", "AWQ check status", "merge eligibility"],
+  "transitions": ["change proposed -> AWQ check running", "AWQ check running -> pass", "AWQ check running -> fail", "pass -> merge eligible only when repository policy requires the check"],
+  "invariants": ["AWQ source revision is a full 40-character commit SHA", "a missing, failed, or cancelled AWQ check is not represented as quality approval", "the lock profiles and requirement set are checked by the pinned AWQ source", "AWQ evidence remains separate from oracle and implementation evidence"],
+  "acceptance_predicates": ["the workflow triggers on pull_request and main push", "the workflow invokes the AWQ reusable workflow at the same immutable revision supplied as awq-ref", "local pinned AWQ check passes", "the workflow has a finite timeout and read-only contents permission"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/awq-enforcement.json", "checker": "tools/check_spec.py plus pinned AWQ check", "command": ["python", "tools/check_spec.py", "specifications/awq-enforcement.json"], "scope": "quality enforcement lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 1800, "model": {"states": ["proposed", "checking", "pass", "fail"], "initial": "proposed", "transitions": [{"from": "proposed", "to": "checking"}, {"from": "checking", "to": "pass"}, {"from": "checking", "to": "fail"}], "forbidden_transitions": [{"from": "proposed", "to": "pass"}, {"from": "fail", "to": "pass"}]}}
+}

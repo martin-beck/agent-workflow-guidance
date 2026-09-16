@@ -1,0 +1,16 @@
+name: AWQ
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  awq:
+    uses: martin-beck/agent-workflow-quality/.github/workflows/awq-reusable.yml@fcf8df6ab7ac8d5be63400727bcf2b02fff74804
+    with:
+      awq-ref: fcf8df6ab7ac8d5be63400727bcf2b02fff74804

@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-AWQ-ENFORCEMENT",
+  "spec_version": 1,
+  "artifact_digest": "sha256:be4701861f2042413645464d8cb05e22f88147d0ade4cebca817a7a6ab66b532",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py plus AWQ 0.6.0",
+  "status": "pass",
+  "properties_checked": [
+    "finite quality-enforcement states and transitions are structurally valid",
+    "local AWQ PR tier passes all selected profiles",
+    "AWQ source is bound to full commit fcf8df6ab7ac8d5be63400727bcf2b02fff74804"
+  ],
+  "checked_at": "2026-09-16T12:00:00Z",
+  "evidence_digest": "sha256:06b3f4c16cfcf5eb5d6a22cf9156e1bd1cc7063f0751150e0f8a0137d540f6ca",
+  "scope": "AWG quality profile and reusable workflow",
+  "limitations": [
+    "Branch-protection required-status configuration is hosted-repository state and must be verified separately.",
+    "A passing AWQ result does not prove formal correctness, oracle alignment, or runtime behavior."
+  ]
+}

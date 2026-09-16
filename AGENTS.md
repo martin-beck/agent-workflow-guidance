@@ -16,6 +16,12 @@ before implementation if the bound revision, policy, or specification
 changes. Missing, stale, failed, timed-out, or inconclusive checks are
 fail-closed conditions.
 
+Every pull request and every push to `main` must pass the pinned AWQ reusable
+workflow. Do not merge or publish a change while AWQ is missing, cancelled,
+failed, or running against a different source revision than
+`quality/awq.lock.json`. Changes to the AWQ profile, lock, workflow, or quality
+policy require the same specification-first and autonomous-check process.
+
 Do not add runtime network access, floating versions, credentials, private
 paths, raw prompts, raw transcripts, or unbounded evidence. Commands in future
 adapters must be argument arrays with finite deadlines and content-minimized
