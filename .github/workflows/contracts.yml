@@ -45,4 +45,6 @@ jobs:
           python tools/check_spec.py specifications/integration-binding.json --result specifications/integration-binding.check.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
+          python tools/check_request_gate.py examples/decision-request.json --phase oracle
+          python tools/check_request_gate.py examples/decision-request.json --phase implementation --task-revision 3
           python -m unittest discover -s tests -v
