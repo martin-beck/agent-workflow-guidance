@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-INTEGRATION-BINDING",
+  "spec_version": 1,
+  "artifact_digest": "sha256:6a7da4259bb1392132d4670042a7a33a86ad8c09d3fdfa6adbefbe8a4558890a",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py plus state-repository integration checker",
+  "status": "pass",
+  "properties_checked": [
+    "binding lifecycle is finite and stale transitions cannot return to valid",
+    "integration authority boundaries and evidence classes are explicit"
+  ],
+  "checked_at": "2026-09-16T23:34:41Z",
+  "evidence_digest": "sha256:abde7dc0bd78e82f0eb7c1fbf88b706487d5eccbd806548ed9bcfca0dddd647d",
+  "scope": "Coordinator and AWQ integration contract",
+  "limitations": [
+    "The checker does not provide a runtime transport or prove remote service availability.",
+    "Hosted branch protection and AWQ policy execution remain separate evidence."
+  ]
+}

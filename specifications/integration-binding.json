@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-INTEGRATION-BINDING",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Bind AWG decision evidence to the exact Coordinator task identity and AWQ policy lock without duplicating either authority.",
+  "scope": ["Coordinator binding", "AWQ profile and lock", "formal, oracle, implementation, and verification evidence classes", "stale-context detection"],
+  "assumptions": ["Coordinator owns task identity and lifecycle", "AWQ owns quality requirements and lock interpretation", "AWG records references rather than copying authority state"],
+  "unknowns": ["Runtime event transport is a downstream integration concern"],
+  "state_variables": ["project identity", "task revision", "repository head", "AWQ lock identity", "evidence class", "decision validity"],
+  "transitions": ["unbound -> bound", "bound -> evidence_referenced", "evidence_referenced -> valid", "bound -> stale", "evidence_referenced -> stale"],
+  "invariants": ["Coordinator and product/state repository identities match the binding", "AWQ evidence references an immutable lock identity", "Oracle approval is not implementation or verification evidence", "A changed task revision, repository head, or AWQ lock invalidates dependent decision evidence", "AWG does not mutate Coordinator or AWQ authority"],
+  "acceptance_predicates": ["The binding checker passes for the current project", "A mismatched repository identity fails", "A changed AWQ lock digest fails", "Each evidence reference has exactly one declared class", "Stale context is reported rather than silently reused"],
+  "formalization": {
+    "method": "state-machine",
+    "model_ref": "specifications/integration-binding.json",
+    "checker": "tools/check_spec.py plus state-repository integration checker",
+    "command": ["python", "tools/check_spec.py", "specifications/integration-binding.json"],
+    "scope": "one bound project, task revision, and quality lock",
+    "expected_result": "invariants-hold",
+    "timeout_seconds": 60,
+    "model": {
+      "states": ["unbound", "bound", "evidence_referenced", "valid", "stale"],
+      "initial": "unbound",
+      "transitions": [{"from": "unbound", "to": "bound"}, {"from": "bound", "to": "evidence_referenced"}, {"from": "evidence_referenced", "to": "valid"}, {"from": "bound", "to": "stale"}, {"from": "evidence_referenced", "to": "stale"}],
+      "forbidden_transitions": [{"from": "unbound", "to": "valid"}, {"from": "stale", "to": "valid"}]
+    }
+  }
+}
