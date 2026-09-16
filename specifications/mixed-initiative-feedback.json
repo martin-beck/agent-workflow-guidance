@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-MIXED-INITIATIVE-FEEDBACK",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define durable correction, confirmation, pause, and resume semantics for mixed-initiative oracle interaction.",
+  "scope": ["agent recommendation", "human correction", "confirmation", "pause and resume", "context preservation"],
+  "assumptions": ["A decision packet has a stable identity and revision", "A correction can supersede an unexecuted recommendation"],
+  "unknowns": ["Human response latency and correction frequency require later observation"],
+  "state_variables": ["packet identity", "recommendation revision", "oracle response", "execution disposition", "resume context"],
+  "transitions": ["recommended -> corrected", "recommended -> confirmed", "recommended -> paused", "corrected -> confirmed", "confirmed -> resumed", "paused -> resumed", "resumed -> completed"],
+  "invariants": ["A correction supersedes the prior recommendation before execution", "A confirmation records the packet revision it approves", "Resume preserves the original decision context and response history", "Pause does not authorize implementation"],
+  "acceptance_predicates": ["A corrected packet cannot execute under its old revision", "A paused packet can resume only with its identity and context", "A confirmation and correction are distinguishable records", "A stale response is rejected"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/mixed-initiative-feedback.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/mixed-initiative-feedback.json"], "scope": "offline mixed-initiative interaction lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["recommended", "corrected", "confirmed", "paused", "resumed", "completed"], "initial": "recommended", "transitions": [{"from": "recommended", "to": "corrected"}, {"from": "recommended", "to": "confirmed"}, {"from": "recommended", "to": "paused"}, {"from": "corrected", "to": "confirmed"}, {"from": "confirmed", "to": "resumed"}, {"from": "paused", "to": "resumed"}, {"from": "resumed", "to": "completed"}], "forbidden_transitions": [{"from": "corrected", "to": "completed"}, {"from": "paused", "to": "completed"}, {"from": "recommended", "to": "completed"}]}}
+}

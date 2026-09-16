@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CALIBRATION-DIMENSIONS",
+  "spec_version": 1,
+  "artifact_digest": "sha256:6fd0d0da5f3c4208e6aea60571f4a2458a427ca7dfcebdeded3dfa065581a21c",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["separate confidence dimensions", "bounded escalation lifecycle", "no deployment threshold claim"],
+  "checked_at": "2026-09-17T00:10:00Z",
+  "evidence_digest": "sha256:6fd0d0da5f3c4208e6aea60571f4a2458a427ca7dfcebdeded3dfa065581a21c",
+  "scope": "offline confidence calibration lifecycle",
+  "limitations": ["Synthetic calibration does not establish deployment safety or threshold validity."]
+}

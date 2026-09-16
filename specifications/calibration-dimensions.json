@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CALIBRATION-DIMENSIONS",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define separate offline calibration and escalation measurements for applicability, outcome, and downstream-impact confidence.",
+  "scope": ["applicability confidence", "outcome confidence", "downstream-impact confidence", "synthetic escalation"],
+  "assumptions": ["Confidence values are agent reports rather than calibrated probabilities", "Synthetic labels can be collected without provider access"],
+  "unknowns": ["Calibration and escalation thresholds require empirical evaluation"],
+  "state_variables": ["task", "recommendation", "three confidence dimensions", "observed label", "escalation disposition"],
+  "transitions": ["observed -> scored", "scored -> escalated", "scored -> acted", "escalated -> resolved", "acted -> evaluated"],
+  "invariants": ["The three confidence dimensions remain separately recorded", "A confidence score is not treated as a probability without calibration evidence", "Escalation evidence is separate from outcome evidence"],
+  "acceptance_predicates": ["Each dimension has an operational label", "A synthetic high-impact low-confidence case escalates", "A bounded low-impact case can act", "No threshold is presented as deployment validated"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/calibration-dimensions.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/calibration-dimensions.json"], "scope": "offline confidence calibration lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["observed", "scored", "escalated", "acted", "resolved", "evaluated"], "initial": "observed", "transitions": [{"from": "observed", "to": "scored"}, {"from": "scored", "to": "escalated"}, {"from": "scored", "to": "acted"}, {"from": "escalated", "to": "resolved"}, {"from": "acted", "to": "evaluated"}], "forbidden_transitions": [{"from": "observed", "to": "acted"}, {"from": "scored", "to": "resolved"}]}}
+}

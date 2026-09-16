@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-MIXED-INITIATIVE-FEEDBACK",
+  "spec_version": 1,
+  "artifact_digest": "sha256:61c180c2968cc25cd57fa3d349564427a6073dd136b7638aa62caef7b14b3dd3",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["correction supersession", "confirmation identity", "pause and resume context"],
+  "checked_at": "2026-09-17T00:10:00Z",
+  "evidence_digest": "sha256:61c180c2968cc25cd57fa3d349564427a6073dd136b7638aa62caef7b14b3dd3",
+  "scope": "offline mixed-initiative interaction lifecycle",
+  "limitations": ["The finite model does not measure human response latency or production persistence."]
+}

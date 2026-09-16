@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BOUNDED-AUTHORITY",
+  "spec_version": 1,
+  "artifact_digest": "sha256:35086e33716dc01abb6d3b963fd115998e6f89f79a6ac5508f5c5dc5a1a9dbb0",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["scope and expiry boundaries", "rejection and approval separation", "audit disposition"],
+  "checked_at": "2026-09-17T00:10:00Z",
+  "evidence_digest": "sha256:35086e33716dc01abb6d3b963fd115998e6f89f79a6ac5508f5c5dc5a1a9dbb0",
+  "scope": "offline authority and audit lifecycle",
+  "limitations": ["The model does not select risk-dependent authority granularity."]
+}
