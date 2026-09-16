@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-COORDINATOR-EVIDENCE-BINDING",
+  "spec_version": 1,
+  "artifact_digest": "sha256:5d10dd55be1de029b99377b81604e28efa580a8e7c3863e9a9c19b94f48f8a1e",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py plus state-repository evidence checker",
+  "status": "pass",
+  "properties_checked": ["evidence binding states are finite", "stale evidence cannot transition directly to valid"],
+  "checked_at": "2026-09-16T23:41:56Z",
+  "evidence_digest": "sha256:04af53d2546347dbe07706e883d4083b5a7dabf7d8c491a2c2ad007e747c1d09",
+  "scope": "Coordinator revision-bound evidence",
+  "limitations": ["The checker does not mutate Coordinator state or prove remote event delivery."]
+}

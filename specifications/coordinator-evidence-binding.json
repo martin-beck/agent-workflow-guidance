@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-COORDINATOR-EVIDENCE-BINDING",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Bind formal evidence to the exact Coordinator task revision and reject stale evidence at lifecycle boundaries.",
+  "scope": ["Coordinator task revision", "AWG formal-check evidence", "pre-implementation and transition evidence"],
+  "assumptions": ["Coordinator task front matter is the lifecycle authority", "Evidence artifacts are public-safe references and digests", "Formal checking remains offline and bounded"],
+  "unknowns": ["Future Coordinator event transports may carry the same envelope through another adapter"],
+  "state_variables": ["task identity", "task revision", "task status", "specification digest", "formal-check status", "evidence validity"],
+  "transitions": ["unbound -> bound", "bound -> valid", "bound -> stale", "valid -> stale"],
+  "invariants": ["Evidence task identity and revision equal Coordinator state", "Formal-check identity and digest equal the referenced specification", "Stale evidence cannot become valid without a new check", "Evidence class is explicit and cannot be inferred from oracle approval"],
+  "acceptance_predicates": ["Current evidence passes", "Changed task revision fails", "Changed specification digest fails", "Failed formal status fails", "The checker reports stale rather than silently accepting evidence"],
+  "formalization": {
+    "method": "state-machine",
+    "model_ref": "specifications/coordinator-evidence-binding.json",
+    "checker": "tools/check_spec.py plus state-repository evidence checker",
+    "command": ["python", "tools/check_spec.py", "specifications/coordinator-evidence-binding.json"],
+    "scope": "one task revision and one evidence envelope",
+    "expected_result": "invariants-hold",
+    "timeout_seconds": 60,
+    "model": {
+      "states": ["unbound", "bound", "valid", "stale"],
+      "initial": "unbound",
+      "transitions": [{"from": "unbound", "to": "bound"}, {"from": "bound", "to": "valid"}, {"from": "bound", "to": "stale"}, {"from": "valid", "to": "stale"}],
+      "forbidden_transitions": [{"from": "unbound", "to": "valid"}, {"from": "stale", "to": "valid"}]
+    }
+  }
+}

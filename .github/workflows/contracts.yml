@@ -36,6 +36,8 @@ jobs:
           python -m json.tool specifications/promotion-gate.check.json >/dev/null
           python -m json.tool specifications/integration-binding.json >/dev/null
           python -m json.tool specifications/integration-binding.check.json >/dev/null
+          python -m json.tool specifications/coordinator-evidence-binding.json >/dev/null
+          python -m json.tool specifications/coordinator-evidence-binding.check.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -43,6 +45,7 @@ jobs:
           python tools/check_spec.py specifications/awq-enforcement.json --result specifications/awq-enforcement.check.json
           python tools/check_spec.py specifications/promotion-gate.json --result specifications/promotion-gate.check.json
           python tools/check_spec.py specifications/integration-binding.json --result specifications/integration-binding.check.json
+          python tools/check_spec.py specifications/coordinator-evidence-binding.json --result specifications/coordinator-evidence-binding.check.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
