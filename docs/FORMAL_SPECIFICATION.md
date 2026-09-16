@@ -12,12 +12,15 @@ asks the oracle to choose.
    invariants, acceptance predicates, and a formalization/checker plan.
 3. Run the checker autonomously, offline where possible, using an exact model
    and finite resource/deadline bounds.
-4. Stop on failure, timeout, stale digest, missing evidence, or an inconclusive
+4. Bind the formal-check result to the exact specification digest, identity,
+   version, method, and a passing status. A stale or differently bound result
+   is not evidence.
+5. Stop on failure, timeout, stale digest, missing evidence, or an inconclusive
    result. The oracle can choose among checked candidates but cannot waive a
    failed formal gate.
-5. Include the passed check result and specification digest in the oracle
+6. Include the passed check result and specification digest in the oracle
    packet and final decision record.
-6. Recheck when the task revision, repository head, quality lock, model,
+7. Recheck when the task revision, repository head, quality lock, model,
    assumptions, or specification changes.
 
 ## Formalization levels

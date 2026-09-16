@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-OFFLINE-CONTRACTS",
+  "spec_version": 1,
+  "artifact_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "stale",
+  "properties_checked": ["fixture"],
+  "checked_at": "2026-09-16T00:00:00Z",
+  "evidence_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}
