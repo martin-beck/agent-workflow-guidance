@@ -37,6 +37,31 @@ control, human-agent teaming, and accountable workflow design.
   verification. AWG keeps oracle intent, implementation, and quality evidence
   as distinct records.
 
+## Public project candidates
+
+These are comparison and adapter candidates, not dependencies or endorsements:
+
+- [LangGraph](https://github.com/langchain-ai/langgraph) exposes durable
+  interrupt/resume human-in-the-loop control with checkpointed state. Compare
+  its runtime pause semantics with AWG's ranked alternatives, oracle-added
+  candidate, bounded authority, and append-only decision record.
+- [AutoGen](https://github.com/microsoft/autogen) demonstrates human feedback
+  in multi-agent teams, but its repository currently describes AutoGen as
+  maintenance mode and points new users to [Microsoft Agent
+  Framework](https://github.com/microsoft/agent-framework). Evaluate both as a
+  migration/comparison pair rather than pinning AutoGen.
+- [OpenHands](https://github.com/All-Hands-AI/OpenHands) and its software-agent
+  SDK are relevant hosts for software-development decision gates. Study where
+  AWG packets can sit between planning, tool execution, review, and resumption.
+- [SWE-agent](https://github.com/SWE-agent/SWE-agent) provides a software
+  engineering agent and benchmark context. Use it to test whether AWG's
+  intervention points improve task outcomes without confusing benchmark scores
+  with human-governance evidence.
+
+Each candidate must be evaluated offline or in a sandbox first. The project
+must record exact revision, license, protocol fit, privacy boundary, and what
+was not tested before claiming integration.
+
 ## Research questions
 
 1. How should confidence be calibrated across applicability, outcome, and
@@ -48,3 +73,7 @@ control, human-agent teaming, and accountable workflow design.
    omits the most important alternative?
 5. Which intervention evidence best predicts whether a future task can safely
    proceed without another oracle interaction?
+
+The coordination state tracks each concept, project candidate, and research
+question as a separate AR so that findings can be accepted, rejected, or
+superseded independently.
