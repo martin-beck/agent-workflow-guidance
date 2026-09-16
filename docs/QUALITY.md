@@ -5,8 +5,9 @@ checks in `quality/awq.json` and `quality/awq.lock.json`; the lock selects the
 profiles and requirement identifiers, while the workflow executes the pinned
 AWQ source.
 
-The [AWQ reusable workflow](https://github.com/martin-beck/agent-workflow-quality/blob/fcf8df6ab7ac8d5be63400727bcf2b02fff74804/.github/workflows/awq-reusable.yml)
-is referenced by a full immutable commit SHA. It runs on every pull request,
+The [AWQ reusable workflow source](https://github.com/martin-beck/agent-workflow-quality/blob/fcf8df6ab7ac8d5be63400727bcf2b02fff74804/.github/workflows/awq-reusable.yml)
+is mirrored by `.github/workflows/awq.yml` at the same full immutable source
+SHA, with an explicit consumer-side timeout. It runs on every pull request,
 every push to `main`, and manual dispatch. It executes `doctor` and the PR
 tier offline against the consumer tree. The repository workflow does not
 claim that a green AWQ result proves formal correctness, oracle alignment, or

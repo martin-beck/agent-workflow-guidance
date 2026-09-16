@@ -1,7 +1,7 @@
 # Quality integration
 
-Agent Workflow Quality is enforced by the pinned reusable workflow in
-`.github/workflows/awq.yml`. The checked-in profile and lock select the
+Agent Workflow Quality is enforced by the pinned AWQ workflow in
+`.github/workflows/awq.yml`, which mirrors the pinned source workflow. The checked-in profile and lock select the
 offline requirements for core, documentation, GitHub Actions, privacy,
 Python, schemas, shell, and supply-chain checks.
 

@@ -11,7 +11,26 @@ permissions:
 
 jobs:
   awq:
-    uses: martin-beck/agent-workflow-quality/.github/workflows/awq-reusable.yml@fcf8df6ab7ac8d5be63400727bcf2b02fff74804
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
-    with:
-      awq-ref: fcf8df6ab7ac8d5be63400727bcf2b02fff74804
+    env:
+      AWQ_REF: fcf8df6ab7ac8d5be63400727bcf2b02fff74804
+    steps:
+      - name: Validate immutable AWQ reference
+        run: '[[ "$AWQ_REF" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          path: consumer
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: martin-beck/agent-workflow-quality
+          ref: ${{ env.AWQ_REF }}
+          persist-credentials: false
+          path: awq
+      - name: Run pinned policy bundle offline
+        env:
+          PYTHONPATH: ${{ github.workspace }}/awq/src
+        run: |
+          python3 -m awq --root consumer doctor --format json
+          python3 -m awq --root consumer check --tier pr --format json
