@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "cases": [
+    {
+      "id": "incorrect-implementation",
+      "records": [
+        {"kind": "recommendation", "id": "rec-1", "predecessor": null, "status": "plausible"},
+        {"kind": "oracle_decision", "id": "dec-1", "predecessor": "rec-1", "status": "approved"},
+        {"kind": "implementation", "id": "impl-1", "predecessor": "dec-1", "status": "incorrect"},
+        {"kind": "quality_evidence", "id": "qa-1", "predecessor": "impl-1", "status": "fail"},
+        {"kind": "independent_review", "id": "review-1", "predecessor": "qa-1", "status": "blocked"}
+      ]
+    },
+    {
+      "id": "verified-implementation",
+      "records": [
+        {"kind": "recommendation", "id": "rec-2", "predecessor": null, "status": "plausible"},
+        {"kind": "oracle_decision", "id": "dec-2", "predecessor": "rec-2", "status": "approved"},
+        {"kind": "implementation", "id": "impl-2", "predecessor": "dec-2", "status": "complete"},
+        {"kind": "quality_evidence", "id": "qa-2", "predecessor": "impl-2", "status": "pass"},
+        {"kind": "independent_review", "id": "review-2", "predecessor": "qa-2", "status": "pass"}
+      ]
+    }
+  ]
+}
