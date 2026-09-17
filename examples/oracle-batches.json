@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "workload_claim": false,
+  "batches": [
+    {"id": "single", "relation": "single", "items": ["s1"], "responses": [{"item_ids": ["s1"]}], "authorized": ["s1"], "unresolved": []},
+    {"id": "independent", "relation": "independent", "items": ["i1", "i2"], "responses": [{"item_ids": ["i1"]}], "authorized": ["i1"], "unresolved": ["i2"]},
+    {"id": "coupled", "relation": "coupled", "items": ["c1", "c2"], "responses": [{"item_ids": ["c1", "c2"]}], "authorized": ["c1", "c2"], "unresolved": []}
+  ]
+}

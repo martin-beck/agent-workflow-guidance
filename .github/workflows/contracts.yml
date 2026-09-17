@@ -101,6 +101,8 @@ jobs:
           python -m json.tool fixtures/broken/invalid-role-separation-cases.json >/dev/null
           python -m json.tool examples/confidence-calibration-contract.json >/dev/null
           python -m json.tool fixtures/broken/invalid-confidence-calibration-contract.json >/dev/null
+          python -m json.tool examples/oracle-batches.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-oracle-batches.json >/dev/null
           python -m json.tool examples/autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
@@ -154,6 +156,8 @@ jobs:
           ! python tools/check_role_separation.py fixtures/broken/invalid-role-separation-cases.json
           python tools/check_confidence_calibration.py examples/confidence-calibration-contract.json
           ! python tools/check_confidence_calibration.py fixtures/broken/invalid-confidence-calibration-contract.json
+          python tools/check_oracle_batches.py examples/oracle-batches.json
+          ! python tools/check_oracle_batches.py fixtures/broken/invalid-oracle-batches.json
           python tools/check_autogen_migration.py examples/autogen-migration-decision.json
           ! python tools/check_autogen_migration.py fixtures/broken/invalid-autogen-migration-decision.json
           python tools/check_contracts.py examples/decision-request.json --kind request

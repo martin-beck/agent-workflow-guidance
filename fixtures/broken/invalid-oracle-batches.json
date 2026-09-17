@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "workload_claim": false,
+  "batches": [{"id": "independent", "relation": "independent", "items": ["i1", "i2"], "responses": [{"item_ids": ["i1"]}], "authorized": ["i1", "i2"], "unresolved": []}]
+}
