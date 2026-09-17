@@ -19,6 +19,10 @@ class SpecificationCheckerTests(unittest.TestCase):
         result = self.run_checker("specifications/offline-contracts.json", "--result", "specifications/offline-contracts.check.json")
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_oracle_lifecycle_specification_passes(self) -> None:
+        result = self.run_checker("specifications/oracle-workflow-lifecycle.json", "--result", "specifications/oracle-workflow-lifecycle.check.json")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_invalid_spec_fails_closed(self) -> None:
         result = self.run_checker("fixtures/broken/invalid-spec.json")
         self.assertNotEqual(result.returncode, 0)

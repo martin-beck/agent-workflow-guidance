@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-ORACLE-WORKFLOW-LIFECYCLE",
+  "spec_version": 1,
+  "artifact_digest": "sha256:71cc423ded83d0dcda390cb3264eb3f3b766a5850d2aeeb9ee9a01178fe7b148",
+  "method": "state-machine",
+  "checker": "state/tools/check_oracle_lifecycle.py plus tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": [
+    "exactly four mandatory interaction gates",
+    "revision-bound before and after artifact references",
+    "explicit interaction disposition and fail-closed contradiction handling",
+    "positive and hostile synthetic lifecycle fixtures"
+  ],
+  "checked_at": "2026-09-17T02:00:00Z",
+  "evidence_digest": "sha256:71cc423ded83d0dcda390cb3264eb3f3b766a5850d2aeeb9ee9a01178fe7b148",
+  "scope": "finite four-gate lifecycle records and hostile fail-closed fixtures",
+  "limitations": [
+    "The model validates declared public evidence and transitions; it does not prove user intent, implementation correctness, runtime safety, or the truth of referenced digests."
+  ]
+}
