@@ -91,6 +91,8 @@ jobs:
           python -m json.tool examples/public-project-matrix.json >/dev/null
           python -m json.tool examples/langgraph-mapping.json >/dev/null
           python -m json.tool fixtures/broken/invalid-langgraph-mapping.json >/dev/null
+          python -m json.tool examples/openhands-mapping.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-openhands-mapping.json >/dev/null
           python -m json.tool examples/autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
@@ -134,6 +136,8 @@ jobs:
           python tools/check_public_project_matrix.py examples/public-project-matrix.json
           python tools/check_langgraph_mapping.py examples/langgraph-mapping.json
           ! python tools/check_langgraph_mapping.py fixtures/broken/invalid-langgraph-mapping.json
+          python tools/check_openhands_mapping.py examples/openhands-mapping.json
+          ! python tools/check_openhands_mapping.py fixtures/broken/invalid-openhands-mapping.json
           python tools/check_autogen_migration.py examples/autogen-migration-decision.json
           ! python tools/check_autogen_migration.py fixtures/broken/invalid-autogen-migration-decision.json
           python tools/check_contracts.py examples/decision-request.json --kind request

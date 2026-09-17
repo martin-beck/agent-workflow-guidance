@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "external_project": "OpenHands",
+  "external_repository": "OpenHands/OpenHands",
+  "external_revision": "a0403035a20c91decadd011b907ee5b489f6788b",
+  "runtime_dependency": false,
+  "runtime_integration_claim": false,
+  "privacy_boundary": ["no raw transcript", "no credentials", "no provider call", "synthetic action only"],
+  "mappings": [
+    {"external": "planning.tool_action", "awg": "ranked_options", "invariant": "uncertainty and downstream impact precede execution"},
+    {"external": "sandbox.tool_execution", "awg": "bounded_authority", "invariant": "sandbox scope is not consequential authorization"},
+    {"external": "review.approval_pause", "awg": "decision_request", "invariant": "pause creates a revision-bound packet"},
+    {"external": "conversation.resume", "awg": "continuation", "invariant": "stale task packet or decision revision rejects resume"}
+  ]
+}

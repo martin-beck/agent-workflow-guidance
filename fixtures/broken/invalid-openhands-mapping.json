@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "external_project": "OpenHands",
+  "external_repository": "OpenHands/OpenHands",
+  "external_revision": "a0403035a20c91decadd011b907ee5b489f6788b",
+  "runtime_dependency": true,
+  "runtime_integration_claim": true,
+  "privacy_boundary": ["no raw transcript", "no credentials", "no provider call", "synthetic action only"],
+  "mappings": []
+}
