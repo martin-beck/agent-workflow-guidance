@@ -105,6 +105,8 @@ jobs:
           python -m json.tool fixtures/broken/invalid-oracle-batches.json >/dev/null
           python -m json.tool examples/guidance-lifecycle-cases.json >/dev/null
           python -m json.tool fixtures/broken/invalid-guidance-lifecycle-cases.json >/dev/null
+          python -m json.tool examples/anti-rubber-stamp-cases.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-anti-rubber-stamp-cases.json >/dev/null
           python -m json.tool examples/autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
@@ -162,6 +164,8 @@ jobs:
           ! python tools/check_oracle_batches.py fixtures/broken/invalid-oracle-batches.json
           python tools/check_guidance_lifecycle.py examples/guidance-lifecycle-cases.json
           ! python tools/check_guidance_lifecycle.py fixtures/broken/invalid-guidance-lifecycle-cases.json
+          python tools/check_anti_rubber_stamp.py examples/anti-rubber-stamp-cases.json
+          ! python tools/check_anti_rubber_stamp.py fixtures/broken/invalid-anti-rubber-stamp-cases.json
           python tools/check_autogen_migration.py examples/autogen-migration-decision.json
           ! python tools/check_autogen_migration.py fixtures/broken/invalid-autogen-migration-decision.json
           python tools/check_contracts.py examples/decision-request.json --kind request
