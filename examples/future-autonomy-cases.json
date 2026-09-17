@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "low-intervention-unsafe",
+      "task_class": "api-change",
+      "context": "repo-A",
+      "intervention_count": 0,
+      "calibration_evidence": true,
+      "outcome_evidence": false,
+      "safety_evidence": false,
+      "scope_match": true,
+      "disposition": "oracle-required"
+    },
+    {
+      "id": "bounded-eligible",
+      "task_class": "api-change",
+      "context": "repo-A",
+      "intervention_count": 2,
+      "calibration_evidence": true,
+      "outcome_evidence": true,
+      "safety_evidence": true,
+      "scope_match": true,
+      "disposition": "oracle-free-eligible"
+    },
+    {
+      "id": "changed-context",
+      "task_class": "api-change",
+      "context": "repo-B",
+      "intervention_count": 2,
+      "calibration_evidence": true,
+      "outcome_evidence": true,
+      "safety_evidence": true,
+      "scope_match": false,
+      "disposition": "oracle-required"
+    }
+  ]
+}
