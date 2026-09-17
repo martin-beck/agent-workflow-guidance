@@ -78,6 +78,8 @@ jobs:
           python -m json.tool specifications/conceptual-authoring-gate.check.json >/dev/null
           python -m json.tool specifications/self-hosting-evolution.json >/dev/null
           python -m json.tool specifications/self-hosting-evolution.check.json >/dev/null
+          python -m json.tool examples/evaluation-scenarios.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-evaluation-scenarios.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -106,6 +108,8 @@ jobs:
           python tools/check_spec.py specifications/awq-formal-evidence.json --result specifications/awq-formal-evidence.check.json
           python tools/check_spec.py specifications/conceptual-authoring-gate.json --result specifications/conceptual-authoring-gate.check.json
           python tools/check_spec.py specifications/self-hosting-evolution.json --result specifications/self-hosting-evolution.check.json
+          python tools/check_evaluation_plan.py examples/evaluation-scenarios.json
+          ! python tools/check_evaluation_plan.py fixtures/broken/invalid-evaluation-scenarios.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
