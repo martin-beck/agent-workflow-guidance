@@ -1,0 +1,90 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-ORACLE-WORKFLOW-LIFECYCLE",
+  "version": 1,
+  "decision_class": "conceptual",
+  "objective": "Make intake, discussion, specification review, and post-discussion reconciliation explicit mandatory gates in every AWG oracle interaction lifecycle.",
+  "scope": [
+    "Coordinator task identity and revision binding",
+    "versioned before and after work-plan and design-document references",
+    "versioned specification and formal-check references",
+    "user interaction evidence and explicit continue or unresolved disposition",
+    "contradiction and stale-evidence handling"
+  ],
+  "assumptions": [
+    "Coordinator remains authoritative for task identity, revision, dependencies, claims, and transitions",
+    "AWG owns the interaction-gate contract and AWQ validates its public evidence shape",
+    "Artifact references contain bounded public metadata, digests, and no private discussion content",
+    "The autonomous checker is deterministic and offline"
+  ],
+  "unknowns": [
+    "A future transport may choose a different storage format while preserving this record contract",
+    "Projects may add gate-specific evidence fields without weakening the required fields"
+  ],
+  "state_variables": [
+    "task identity and revision",
+    "gate set and gate status",
+    "before and after artifact references",
+    "interaction disposition",
+    "contradiction set",
+    "lifecycle completion"
+  ],
+  "transitions": [
+    "draft -> intake-open",
+    "intake-open -> discussion-open",
+    "discussion-open -> specification-review-open",
+    "specification-review-open -> reconciliation-open",
+    "reconciliation-open -> complete",
+    "any gate -> unresolved",
+    "unresolved -> reopened"
+  ],
+  "invariants": [
+    "All four mandatory gate types occur exactly once before lifecycle completion",
+    "Every gate is bound to the same current task revision as the lifecycle record",
+    "Every gate has versioned before and after work-plan and design-document references plus specification and formal-check references",
+    "Every gate records that interaction occurred and an explicit continue or unresolved disposition",
+    "A lifecycle with an unresolved contradiction cannot be marked complete",
+    "A stale task revision, failed formal check, missing gate, missing artifact, or unsafe reference fails closed",
+    "Oracle approval and formal evidence do not assert implementation correctness"
+  ],
+  "acceptance_predicates": [
+    "A complete synthetic lifecycle with all four gates passes the autonomous checker",
+    "Missing discussion or specification-review gates are rejected",
+    "Stale gate revisions and incomplete before or after artifacts are rejected",
+    "A complete lifecycle containing an unresolved contradiction is rejected",
+    "A gate explicitly marked unresolved remains non-complete and can be reopened",
+    "Private prompts, transcripts, absolute paths, and unbounded evidence are not accepted"
+  ],
+  "formalization": {
+    "method": "state-machine",
+    "model_ref": "specifications/oracle-workflow-lifecycle.json",
+    "checker": "state/tools/check_oracle_lifecycle.py",
+    "command": ["python", "tools/check_oracle_lifecycle.py", "integration/oracle-lifecycle-positive.json"],
+    "scope": "finite four-gate lifecycle records and hostile fail-closed fixtures",
+    "expected_result": "invariants-hold",
+    "timeout_seconds": 60,
+    "model": {
+      "states": ["draft", "intake-open", "discussion-open", "specification-review-open", "reconciliation-open", "unresolved", "reopened", "complete"],
+      "initial": "draft",
+      "transitions": [
+        {"from": "draft", "to": "intake-open"},
+        {"from": "intake-open", "to": "discussion-open"},
+        {"from": "discussion-open", "to": "specification-review-open"},
+        {"from": "specification-review-open", "to": "reconciliation-open"},
+        {"from": "reconciliation-open", "to": "complete"},
+        {"from": "intake-open", "to": "unresolved"},
+        {"from": "discussion-open", "to": "unresolved"},
+        {"from": "specification-review-open", "to": "unresolved"},
+        {"from": "reconciliation-open", "to": "unresolved"},
+        {"from": "unresolved", "to": "reopened"}
+      ],
+      "forbidden_transitions": [
+        {"from": "draft", "to": "complete"},
+        {"from": "intake-open", "to": "complete"},
+        {"from": "discussion-open", "to": "complete"},
+        {"from": "specification-review-open", "to": "complete"},
+        {"from": "unresolved", "to": "complete"}
+      ]
+    }
+  }
+}
