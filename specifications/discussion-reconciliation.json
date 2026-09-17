@@ -1,0 +1,15 @@
+{
+  "schema_version":"0.2",
+  "spec_id":"AWG-SPEC-DISCUSSION-RECONCILIATION",
+  "version":1,
+  "decision_class":"conceptual",
+  "objective":"Reconcile each discussion outcome into versioned plans, designs, specifications, dependencies, and affected ARs, reopening narrowly when guidance is stale, contradictory, incomplete, or changes scope.",
+  "scope":["discussion decision binding","before and after artifact versions","impact analysis","contradiction and scope-change detection","targeted reopen and repeated discussion"],
+  "assumptions":["Coordinator owns task revisions and AR transitions","AWG preserves prior versions and public provenance","Private discussion content is represented only by bounded typed references"],
+  "unknowns":["Projects may use different artifact storage formats"],
+  "state_variables":["discussion decision","before artifacts","impact analysis","after artifacts","contradictions","reconciliation disposition"],
+  "transitions":["discussion-complete -> analysis","analysis -> reconciled","analysis -> reopened","reopened -> discussion-required","discussion-required -> analysis"],
+  "invariants":["Every required artifact has revision-bound before and after references","Every change has an impact and affected-AR classification","Unresolved contradictions or stale guidance cannot be silently continued","Scope changes reopen affected ARs and require another discussion","Prior versions and provenance remain referenced","Reconciliation approval does not prove implementation correctness"],
+  "acceptance_predicates":["A contradiction-free reconciliation passes","Stale, contradictory, incomplete, and silently-continued fixtures fail closed","A targeted reopen identifies affected ARs and requires discussion"],
+  "formalization":{"method":"state-machine","model_ref":"specifications/discussion-reconciliation.json","checker":"state/tools/check_reconciliation.py plus tools/check_spec.py","command":["python","tools/check_reconciliation.py","integration/reconciliation-positive.json"],"scope":"finite discussion reconciliation and reopen outcomes","expected_result":"invariants-hold","timeout_seconds":60,"model":{"states":["discussion-complete","analysis","reconciled","reopened","discussion-required"],"initial":"discussion-complete","transitions":[{"from":"discussion-complete","to":"analysis"},{"from":"analysis","to":"reconciled"},{"from":"analysis","to":"reopened"},{"from":"reopened","to":"discussion-required"},{"from":"discussion-required","to":"analysis"}],"forbidden_transitions":[{"from":"discussion-complete","to":"reconciled"},{"from":"analysis","to":"reconciled"}]}}
+}
