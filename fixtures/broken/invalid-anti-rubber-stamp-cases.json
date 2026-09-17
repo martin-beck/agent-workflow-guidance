@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "cases": [{
+    "id": "hidden-alternative",
+    "material_alternatives": ["adopt-proposed"],
+    "material_alternatives_disclosed": false,
+    "evidence_gaps": [],
+    "framing": "leading",
+    "rejection_affordance": false,
+    "disposition": "approve",
+    "authority_context": "project-owner"
+  }]
+}

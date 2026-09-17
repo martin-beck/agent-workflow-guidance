@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "informed-approval",
+      "material_alternatives": ["retain-current", "adopt-proposed"],
+      "material_alternatives_disclosed": true,
+      "evidence_gaps": [],
+      "framing": "neutral",
+      "rejection_affordance": true,
+      "disposition": "approve",
+      "authority_context": "project-owner"
+    },
+    {
+      "id": "evidence-clarification",
+      "material_alternatives": ["defer", "adopt-proposed"],
+      "material_alternatives_disclosed": true,
+      "evidence_gaps": ["downstream-cost-unknown"],
+      "framing": "neutral",
+      "rejection_affordance": true,
+      "disposition": "clarify",
+      "authority_context": "project-owner"
+    },
+    {
+      "id": "oracle-rejection",
+      "material_alternatives": ["reject", "revise"],
+      "material_alternatives_disclosed": true,
+      "evidence_gaps": ["security-review-missing"],
+      "framing": "neutral",
+      "rejection_affordance": true,
+      "disposition": "reject",
+      "authority_context": "security-owner"
+    }
+  ]
+}
