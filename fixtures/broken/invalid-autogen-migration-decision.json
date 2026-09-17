@@ -1,0 +1,1 @@
+{"schema_version":1,"autogen":{"repository":"microsoft/autogen","revision":"bad","maintenance_mode":false},"successor":{"repository":"microsoft/autogen","revision":"bad","candidate":"AutoGen"},"decision":"keep","dimensions":{},"runtime_dependency":true,"limitations":[]}

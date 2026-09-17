@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "autogen": {"repository":"microsoft/autogen","revision":"027ecf0a379bcc1d09956d46d12d44a3ad9cee14","maintenance_mode":true},
+  "successor": {"repository":"microsoft/agent-framework","revision":"b83b0e3b3b9d3fb704d5f953c829a5c321a506bf","candidate":"Microsoft Agent Framework"},
+  "decision":"migrate-new-work",
+  "dimensions": {
+    "user_feedback":{"autogen":"HumanInputMiddleware supports configurable input modes","successor":"User-approval design covers local and remote actions","awg_gap":"Neither establishes ranked alternatives and durable oracle provenance","evidence":"https://github.com/microsoft/autogen/blob/main/dotnet/src/AutoGen/Middleware/HumanInputMiddleware.cs"},
+    "termination":{"autogen":"Framework termination behavior is project-configured","successor":"Approval interaction can pause continuation","awg_gap":"AWG requires explicit decision disposition and revision binding","evidence":"https://github.com/microsoft/agent-framework/blob/main/docs/decisions/0006-userapproval.md"},
+    "persistence":{"autogen":"Durable AWG decision persistence is not established","successor":"Durable-agent support is maintained in an extension","awg_gap":"Framework persistence is not oracle-decision provenance","evidence":"https://github.com/microsoft/agent-framework/blob/main/docs/features/durable-agents/README.md"},
+    "authority":{"autogen":"Human input is middleware interaction","successor":"Approval is an action authorization surface","awg_gap":"AWG adds bounded scope, expiry, rejection power, and audit evidence","evidence":"https://github.com/microsoft/agent-framework/blob/main/docs/decisions/0006-userapproval.md"}
+  },
+  "runtime_dependency":false,
+  "limitations":["This is a dated public comparison, not a tested migration or safety claim."]
+}
