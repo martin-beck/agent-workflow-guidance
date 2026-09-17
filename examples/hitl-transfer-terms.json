@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "behavioral_transfer_claim": false,
+  "terms": [
+    {"term": "action_correction", "source_meaning": "human changes an action", "awg_meaning": "oracle may select or add a ranked option", "disposition": "conditional", "counterexample": "a correction is not authorization to edit an unrelated dependent task"},
+    {"term": "delayed_outcome", "source_meaning": "later reward reflects an earlier action", "awg_meaning": "later evidence updates evaluation", "disposition": "rejected", "counterexample": "a later successful test cannot retroactively prove an unsafe approval"},
+    {"term": "intervention_timing", "source_meaning": "human enters during action selection", "awg_meaning": "a risk gate pauses before consequential work", "disposition": "transferred", "counterexample": "a pause without a revision-bound packet is not an AWG decision"},
+    {"term": "confidence", "source_meaning": "agent estimate of action quality", "awg_meaning": "separate applicability and downstream-risk estimates", "disposition": "bounded", "counterexample": "high confidence is not reward and cannot waive governance evidence"}
+  ]
+}
