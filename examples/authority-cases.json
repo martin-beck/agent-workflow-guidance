@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "specification_ref": "specifications/bounded-authority.json",
+  "cases": [
+    {"id":"A-001","task_id":"AR-X","requested_scope":["src/config"],"approved_scope":["src/config"],"current_tick":5,"expiry_tick":10,"alternatives_count":3,"context_present":true,"rejection_allowed":true,"disposition":"approved","audit_fields":["task_id","scope","expiry","disposition"]},
+    {"id":"A-002","task_id":"AR-Y","requested_scope":["src/api"],"approved_scope":["src/api"],"current_tick":12,"expiry_tick":10,"alternatives_count":2,"context_present":true,"rejection_allowed":true,"disposition":"expired","audit_fields":["task_id","scope","expiry","disposition"]},
+    {"id":"A-003","task_id":"AR-Z","requested_scope":["tests"],"approved_scope":[],"current_tick":3,"expiry_tick":8,"alternatives_count":2,"context_present":true,"rejection_allowed":true,"disposition":"rejected","audit_fields":["task_id","scope","expiry","disposition"]}
+  ]
+}
