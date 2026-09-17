@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-SELF-HOSTING-EVOLUTION",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Enable AWG to govern its own design, implementation, quality, and coordination changes using the same specification-first workflow.",
+  "scope": ["AWG design changes", "AWG implementation changes", "AWQ quality evidence", "Coordinator lifecycle", "oracle evidence", "recursion boundary"],
+  "assumptions": ["The bootstrap specification and checker are the trusted initial seed", "Coordinator remains lifecycle authority and AWQ remains quality-policy authority"],
+  "unknowns": ["Future successor specifications may refine this policy"],
+  "state_variables": ["change classification", "successor specification", "oracle decision", "implementation evidence", "quality evidence", "release state"],
+  "transitions": ["proposed -> specified", "specified -> oracle-gated", "oracle-gated -> implemented", "implemented -> quality-checked", "quality-checked -> reviewed", "reviewed -> released"],
+  "invariants": ["Every AWG design/conceptual change has a formally checked successor specification", "Formal-model, oracle, implementation, quality, CI, and release evidence remain distinct", "Coordinator owns task revision and lifecycle transitions", "AWQ checks the applicable quality and formal-evidence profiles", "Changes to the seed, checker, or self-hosting rule require a successor specification", "Routine operational maintenance still has a bounded specification"],
+  "acceptance_predicates": ["Self-hosting enables only after the required bootstrap ARs are done", "An unspecified AWG design change is rejected", "Formal checks run before oracle selection and before implementation", "A passing quality check cannot substitute for oracle approval or implementation evidence", "The policy records its recursion boundary and limitations"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/self-hosting-evolution.json", "checker": "tools/check_spec.py plus state self-hosting checker", "command": ["python", "tools/check_spec.py", "specifications/self-hosting-evolution.json"], "scope": "AWG self-hosting change lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["proposed", "specified", "oracle-gated", "implemented", "quality-checked", "reviewed", "released"], "initial": "proposed", "transitions": [{"from": "proposed", "to": "specified"}, {"from": "specified", "to": "oracle-gated"}, {"from": "oracle-gated", "to": "implemented"}, {"from": "implemented", "to": "quality-checked"}, {"from": "quality-checked", "to": "reviewed"}, {"from": "reviewed", "to": "released"}], "forbidden_transitions": [{"from": "proposed", "to": "oracle-gated"}, {"from": "specified", "to": "implemented"}, {"from": "implemented", "to": "released"}]}}
+}
