@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-AUTOGEN-SUCCESSOR-COMPARISON",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify an evidence-bounded comparison and migration decision for AutoGen and its successor project without adding a runtime dependency.",
+  "scope": ["maintenance mode", "successor identity", "feedback semantics", "termination", "persistence", "authority"],
+  "assumptions": ["Maintenance state is time-sensitive public evidence", "A comparison does not establish integration"],
+  "unknowns": ["Successor feature and governance details require dated refresh"],
+  "state_variables": ["candidate", "maintenance evidence", "workflow evidence", "comparison", "migration disposition"],
+  "transitions": ["candidate -> evidenced", "evidenced -> compared", "compared -> retain", "compared -> migrate", "compared -> defer"],
+  "invariants": ["Maintenance assumptions are recorded separately from feature claims", "Migration recommendation cannot be based on undocumented capability", "No comparison implies runtime dependency"],
+  "acceptance_predicates": ["AutoGen and successor identity are distinct", "Feedback, termination, persistence, and authority evidence are separate", "A stale maintenance claim fails closed", "The disposition records limitations"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/autogen-successor-comparison.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/autogen-successor-comparison.json"], "scope": "offline comparison and migration lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["candidate", "evidenced", "compared", "retain", "migrate", "defer"], "initial": "candidate", "transitions": [{"from": "candidate", "to": "evidenced"}, {"from": "evidenced", "to": "compared"}, {"from": "compared", "to": "retain"}, {"from": "compared", "to": "migrate"}, {"from": "compared", "to": "defer"}], "forbidden_transitions": [{"from": "candidate", "to": "migrate"}, {"from": "evidenced", "to": "migrate"}]}}
+}

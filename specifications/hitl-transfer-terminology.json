@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-HITL-TRANSFER-TERMINOLOGY",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify which action-level human-in-the-loop reinforcement-learning concepts transfer to AWG and which are rejected or remain unknown.",
+  "scope": ["action-level correction", "delayed outcome", "intervention timing", "confidence", "transfer decision", "counterexample"],
+  "assumptions": ["Terminology is recorded before implementation claims", "An analogy does not establish equivalent semantics"],
+  "unknowns": ["Transfer validity depends on task and feedback regime"],
+  "state_variables": ["term", "source meaning", "AWG meaning", "counterexample", "transfer disposition"],
+  "transitions": ["term -> compared", "compared -> transferred", "compared -> rejected", "compared -> conditional", "transferred -> bounded"],
+  "invariants": ["Every transferred term has an explicit mapping", "Rejected assumptions have counterexamples", "Delayed outcomes do not become immediate approval evidence", "Confidence remains distinct from reward"],
+  "acceptance_predicates": ["Action correction, timing, delay, and confidence are separately defined", "At least one non-transfer counterexample is recorded", "Conditional transfer states its boundary", "Terminology consistency is checkable"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/hitl-transfer-terminology.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/hitl-transfer-terminology.json"], "scope": "offline terminology transfer lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["term", "compared", "transferred", "rejected", "conditional", "bounded"], "initial": "term", "transitions": [{"from": "term", "to": "compared"}, {"from": "compared", "to": "transferred"}, {"from": "compared", "to": "rejected"}, {"from": "compared", "to": "conditional"}, {"from": "transferred", "to": "bounded"}], "forbidden_transitions": [{"from": "term", "to": "transferred"}, {"from": "rejected", "to": "bounded"}]}}
+}

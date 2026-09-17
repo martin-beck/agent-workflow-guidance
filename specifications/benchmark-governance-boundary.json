@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BENCHMARK-GOVERNANCE-BOUNDARY",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define a synthetic benchmark boundary that separates task success from intervention cost, rework, dependent-task effects, decision quality, and governance evidence.",
+  "scope": ["task score", "intervention cost", "rework", "dependent-task effect", "decision quality", "governance evidence"],
+  "assumptions": ["Synthetic benchmark records can keep outcome and governance fields distinct", "Task success alone is insufficient evidence of safe autonomy"],
+  "unknowns": ["External validity and effect sizes require later studies"],
+  "state_variables": ["scenario", "task outcome", "intervention record", "dependent outcome", "governance review"],
+  "transitions": ["scenario -> executed", "executed -> scored", "scored -> intervention-recorded", "intervention-recorded -> dependent-evaluated", "dependent-evaluated -> governed"],
+  "invariants": ["Task score cannot satisfy human-guidance predicates by itself", "Intervention cost is not hidden in task score", "Dependent-task effects are recorded separately", "Governance review has its own evidence"],
+  "acceptance_predicates": ["A successful task with unsafe intervention evidence fails governance", "Rework and dependent impact are measurable independently", "Synthetic results do not claim production safety", "Missing governance evidence fails closed"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/benchmark-governance-boundary.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/benchmark-governance-boundary.json"], "scope": "offline benchmark and governance lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["scenario", "executed", "scored", "intervention-recorded", "dependent-evaluated", "governed"], "initial": "scenario", "transitions": [{"from": "scenario", "to": "executed"}, {"from": "executed", "to": "scored"}, {"from": "scored", "to": "intervention-recorded"}, {"from": "intervention-recorded", "to": "dependent-evaluated"}, {"from": "dependent-evaluated", "to": "governed"}], "forbidden_transitions": [{"from": "scored", "to": "governed"}, {"from": "executed", "to": "governed"}]}}
+}
