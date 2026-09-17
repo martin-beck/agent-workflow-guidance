@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-DECISION-EVIDENCE-SEPARATION",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Keep recommendation, oracle decision, implementation, quality evidence, and independent review as distinct records in a synthetic workflow.",
+  "scope": ["recommendation", "oracle decision", "implementation", "quality evidence", "independent review"],
+  "assumptions": ["Each record has an identity and predecessor reference", "A plausible recommendation can still be implemented incorrectly"],
+  "unknowns": ["Review depth depends on implementation risk"],
+  "state_variables": ["recommendation", "oracle disposition", "implementation result", "quality result", "review result"],
+  "transitions": ["recommended -> decided", "decided -> implemented", "implemented -> quality-checked", "quality-checked -> independently-reviewed"],
+  "invariants": ["Approval does not imply implementation correctness", "Quality evidence does not rewrite the oracle decision", "Independent review is separate from implementation", "A failed quality check blocks final review"],
+  "acceptance_predicates": ["All five record types are individually identifiable", "A plausible but incorrect implementation is representable", "Approval alone cannot reach independent review", "Review binds to implementation and quality revisions"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/decision-evidence-separation.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/decision-evidence-separation.json"], "scope": "offline decision-to-review evidence lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["recommended", "decided", "implemented", "quality-checked", "independently-reviewed"], "initial": "recommended", "transitions": [{"from": "recommended", "to": "decided"}, {"from": "decided", "to": "implemented"}, {"from": "implemented", "to": "quality-checked"}, {"from": "quality-checked", "to": "independently-reviewed"}], "forbidden_transitions": [{"from": "recommended", "to": "independently-reviewed"}, {"from": "decided", "to": "independently-reviewed"}, {"from": "implemented", "to": "independently-reviewed"}]}}
+}

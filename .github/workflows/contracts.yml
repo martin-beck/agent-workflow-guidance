@@ -52,6 +52,16 @@ jobs:
           python -m json.tool specifications/public-project-comparison.check.json >/dev/null
           python -m json.tool specifications/langgraph-pause-resume-mapping.json >/dev/null
           python -m json.tool specifications/langgraph-pause-resume-mapping.check.json >/dev/null
+          python -m json.tool specifications/autogen-successor-comparison.json >/dev/null
+          python -m json.tool specifications/autogen-successor-comparison.check.json >/dev/null
+          python -m json.tool specifications/openhands-decision-gates.json >/dev/null
+          python -m json.tool specifications/openhands-decision-gates.check.json >/dev/null
+          python -m json.tool specifications/benchmark-governance-boundary.json >/dev/null
+          python -m json.tool specifications/benchmark-governance-boundary.check.json >/dev/null
+          python -m json.tool specifications/hitl-transfer-terminology.json >/dev/null
+          python -m json.tool specifications/hitl-transfer-terminology.check.json >/dev/null
+          python -m json.tool specifications/decision-evidence-separation.json >/dev/null
+          python -m json.tool specifications/decision-evidence-separation.check.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -67,6 +77,11 @@ jobs:
           python tools/check_spec.py specifications/bounded-authority.json --result specifications/bounded-authority.check.json
           python tools/check_spec.py specifications/public-project-comparison.json --result specifications/public-project-comparison.check.json
           python tools/check_spec.py specifications/langgraph-pause-resume-mapping.json --result specifications/langgraph-pause-resume-mapping.check.json
+          python tools/check_spec.py specifications/autogen-successor-comparison.json --result specifications/autogen-successor-comparison.check.json
+          python tools/check_spec.py specifications/openhands-decision-gates.json --result specifications/openhands-decision-gates.check.json
+          python tools/check_spec.py specifications/benchmark-governance-boundary.json --result specifications/benchmark-governance-boundary.check.json
+          python tools/check_spec.py specifications/hitl-transfer-terminology.json --result specifications/hitl-transfer-terminology.check.json
+          python tools/check_spec.py specifications/decision-evidence-separation.json --result specifications/decision-evidence-separation.check.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle

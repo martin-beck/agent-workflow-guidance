@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-OPENHANDS-DECISION-GATES",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Model OpenHands decision-gate insertion points, resume transitions, and sandbox boundaries without treating documentation as adapter evidence.",
+  "scope": ["sandboxed action", "uncertainty gate", "high-impact tool call", "dependent-task change", "human resume"],
+  "assumptions": ["The examined revision is recorded exactly", "A sandbox boundary is independently checkable"],
+  "unknowns": ["A tested adapter requires a separate implementation task"],
+  "state_variables": ["agent action", "risk signal", "AWG packet", "sandbox disposition", "resume context"],
+  "transitions": ["action -> gated", "gated -> sandboxed", "gated -> packet-created", "packet-created -> oracle-decision", "oracle-decision -> resumed", "sandboxed -> observed"],
+  "invariants": ["High-impact actions cannot bypass the gate", "Documentation evidence is not adapter evidence", "Resume binds to the original task and decision revision", "Sandbox escape is rejected"],
+  "acceptance_predicates": ["Uncertainty and dependent-task changes can create packets", "A synthetic high-impact action pauses", "No runtime adapter is claimed by this design check", "Resume requires a matching oracle decision"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/openhands-decision-gates.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/openhands-decision-gates.json"], "scope": "offline OpenHands gate insertion lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["action", "gated", "sandboxed", "packet-created", "oracle-decision", "resumed", "observed"], "initial": "action", "transitions": [{"from": "action", "to": "gated"}, {"from": "gated", "to": "sandboxed"}, {"from": "gated", "to": "packet-created"}, {"from": "packet-created", "to": "oracle-decision"}, {"from": "oracle-decision", "to": "resumed"}, {"from": "sandboxed", "to": "observed"}], "forbidden_transitions": [{"from": "action", "to": "observed"}, {"from": "packet-created", "to": "observed"}]}}
+}
