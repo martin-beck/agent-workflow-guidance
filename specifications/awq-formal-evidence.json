@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-AWQ-FORMAL-EVIDENCE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Require AWG formal specifications and checks to declare evidence class, finite bounds, assumptions, non-claims, and limitations without presenting a model check as implementation proof.",
+  "scope": ["formal specification", "formal-check result", "evidence class", "finite bounds", "assumptions", "limitations", "AWQ quality gate"],
+  "assumptions": ["AWQ-FORMAL-001 remains owned by Agent Workflow Quality", "AWG product checks remain repository-local and deterministic"],
+  "unknowns": ["Formal-model strength and implementation refinement require separate review"],
+  "state_variables": ["specification", "formal result", "evidence classification", "quality disposition", "non-claim boundary"],
+  "transitions": ["draft -> classified", "classified -> checked", "checked -> quality-pass", "checked -> quality-fail"],
+  "invariants": ["A formal result names its method and checked properties", "Bounded-model evidence declares finite scope and limitations", "AWQ evidence is separate from oracle approval and implementation evidence", "A passing model check never implies implementation correctness"],
+  "acceptance_predicates": ["The product selects the upstream formal-evidence profile", "The lock contains AWQ-FORMAL-001 at the pinned registry digest", "Missing evidence class or limitations fails quality validation", "A model pass with an implementation proof claim is rejected"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/awq-formal-evidence.json", "checker": "tools/check_spec.py plus pinned AWQ formal-evidence profile", "command": ["python", "tools/check_spec.py", "specifications/awq-formal-evidence.json"], "scope": "formal evidence quality lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["draft", "classified", "checked", "quality-pass", "quality-fail"], "initial": "draft", "transitions": [{"from": "draft", "to": "classified"}, {"from": "classified", "to": "checked"}, {"from": "checked", "to": "quality-pass"}, {"from": "checked", "to": "quality-fail"}], "forbidden_transitions": [{"from": "draft", "to": "quality-pass"}, {"from": "classified", "to": "quality-pass"}, {"from": "quality-fail", "to": "quality-pass"}]}}
+}
