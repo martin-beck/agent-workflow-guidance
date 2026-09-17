@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "thresholds_status": "unvalidated",
+  "collapsed_score": null,
+  "dimensions": [
+    {"name": "applicability", "predicted": 0.9, "observed": 0.8, "mae": 0.1, "threshold": 0.2},
+    {"name": "outcome", "predicted": 0.8, "observed": 0.4, "mae": 0.4, "threshold": 0.2},
+    {"name": "downstream_impact", "predicted": 0.2, "observed": 0.7, "mae": 0.5, "threshold": 0.2}
+  ]
+}
