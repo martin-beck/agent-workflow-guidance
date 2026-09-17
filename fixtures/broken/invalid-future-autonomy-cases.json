@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "cases": [{
+    "id": "fewer-interventions-is-enough",
+    "task_class": "api-change",
+    "context": "repo-A",
+    "intervention_count": 0,
+    "calibration_evidence": false,
+    "outcome_evidence": false,
+    "safety_evidence": false,
+    "scope_match": true,
+    "disposition": "oracle-free-eligible"
+  }]
+}
