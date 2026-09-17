@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "thresholds_status": "validated",
+  "collapsed_score": 0.7,
+  "dimensions": [{"name": "applicability", "predicted": 0.7, "observed": 0.7, "mae": 0, "threshold": 0.2}]
+}
