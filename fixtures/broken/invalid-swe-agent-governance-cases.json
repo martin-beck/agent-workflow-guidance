@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "benchmark": "synthetic-swe-agent-oracle-boundary",
+  "external_revision": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+  "production_safety_claim": true,
+  "cases": [{"id": "score-only", "task_score": 1.0, "governance_status": "pass"}]
+}
