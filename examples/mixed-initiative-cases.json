@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "specification_ref": "specifications/mixed-initiative-feedback.json",
+  "cases": [
+    {"id":"M-001","packet_id":"P-001","recommendation_revision":1,"correction_revision":2,"superseded_revision":1,"confirmed_revision":2,"paused_revision":2,"resumed_revision":2,"context_id":"CTX-001","expected":"pass"},
+    {"id":"M-002","packet_id":"P-002","recommendation_revision":1,"correction_revision":null,"superseded_revision":null,"confirmed_revision":1,"paused_revision":1,"resumed_revision":1,"context_id":"CTX-002","expected":"pass"},
+    {"id":"M-003","packet_id":"P-003","recommendation_revision":4,"correction_revision":5,"superseded_revision":4,"confirmed_revision":5,"paused_revision":5,"resumed_revision":5,"context_id":"CTX-003","expected":"pass"}
+  ]
+}
