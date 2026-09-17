@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id": "active-match", "scope": "repo-A:api", "repository_revision": "1111111111111111111111111111111111111111", "status": "reusable", "authorization": "allowed", "counterexample": false, "revalidated_from": null},
+    {"id": "expired-blocked", "scope": "repo-A:api", "repository_revision": "1111111111111111111111111111111111111111", "status": "expired", "authorization": "blocked", "counterexample": false, "revalidated_from": null},
+    {"id": "expired-revalidated", "scope": "repo-A:api", "repository_revision": "1111111111111111111111111111111111111111", "status": "revalidated", "authorization": "allowed", "counterexample": false, "revalidated_from": "expired-1"},
+    {"id": "changed-context", "scope": "repo-A:api", "repository_revision": "2222222222222222222222222222222222222222", "status": "invalidated", "authorization": "blocked", "counterexample": false, "revalidated_from": null}
+  ]
+}
