@@ -1,0 +1,1 @@
+{"schema_version":1,"specification_ref":"specifications/clarification-regret-gate.json","cases":[{"id":"C-001","alternatives":["one"],"applicability_confidence":0.99,"ambiguity":0.5,"downstream_impact":0.5,"harm_if_wrong":0.5,"intervention_cost":0.1,"material_ambiguity":true,"ambiguity_resolved":false,"question_scope":"","expected_decision":"act"}]}
