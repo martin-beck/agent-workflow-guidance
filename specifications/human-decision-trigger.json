@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-HUMAN-DECISION-TRIGGER",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define a revision-bound, explicit AR trigger that opens a TUI session for user requests, proposal review, mandatory approval, or agent uncertainty.",
+  "scope": ["Coordinator AR trigger", "Guidance request binding", "TUI session lifecycle", "user and agent activation"],
+  "assumptions": ["Coordinator remains lifecycle authority", "Guidance remains decision-semantics authority", "TUI is a downstream presentation and input client"],
+  "unknowns": ["Transport and process supervision are deployment-specific"],
+  "state_variables": ["task revision", "activation reason", "decision status", "request reference", "TUI contract version"],
+  "transitions": ["absent -> pending", "pending -> presenting", "presenting -> in_progress", "in_progress -> resolved", "in_progress -> clarification_requested", "pending -> cancelled", "pending -> superseded"],
+  "invariants": ["A trigger is explicitly interaction_required and never inferred from ordinary AR status", "The trigger binds to one task revision", "Only a valid AWG request reference can open a TUI session", "Clarification does not resolve the underlying decision", "Coordinator alone persists terminal trigger state"],
+  "acceptance_predicates": ["All four user or agent activation cases have distinct values", "Malformed or stale trigger data fails validation", "A TUI response can be correlated by task, revision, request, and contract version", "A clarification response leaves the trigger pending for follow-up"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/human-decision-trigger.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/human-decision-trigger.json"], "scope": "offline trigger lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["absent", "pending", "presenting", "in_progress", "clarification_requested", "resolved", "superseded", "cancelled"], "initial": "absent", "transitions": [{"from": "absent", "to": "pending"}, {"from": "pending", "to": "presenting"}, {"from": "presenting", "to": "in_progress"}, {"from": "in_progress", "to": "resolved"}, {"from": "in_progress", "to": "clarification_requested"}, {"from": "pending", "to": "cancelled"}, {"from": "pending", "to": "superseded"}], "forbidden_transitions": [{"from": "absent", "to": "resolved"}, {"from": "pending", "to": "resolved"}, {"from": "clarification_requested", "to": "resolved"}]}}
+}

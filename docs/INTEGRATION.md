@@ -34,6 +34,33 @@
 9. The agent implements only within the decision scope and records separate
    execution and verification evidence.
 
+## Human-decision trigger bridge
+
+An AR that needs a live human session carries the versioned
+`human_interaction` object defined by
+`schema/human-decision-trigger.schema.json`. This is the explicit entry
+contract between Coordinator and the TUI; an ordinary AR lifecycle status is
+not a request to open a UI. `interaction_required` is always `true` while the
+trigger exists, and `decision_status` records the session lifecycle.
+
+Agents must create this object when the user asks for a decision, requests
+more detail about a design or work plan, asks to compare agent proposals, or
+when the agent reports genuine uncertainty about its own design/work-plan
+choice. The `activation` and `requested_by` fields preserve why the pause was
+opened. The object must bind to the exact `task_ref` and `task_revision`, and
+must reference the corresponding `decision_request_ref` once AWG has built the
+decision packet. The TUI consumes the request and returns a response carrying
+the same task, revision, request, and contract identity. Coordinator alone
+transitions the trigger to `resolved`, `superseded`, or `cancelled` and writes
+the selected proposal, clarification, or user-authored proposal into the AR
+record/specification.
+
+Validate a standalone trigger offline with:
+
+```text
+python tools/check_contracts.py examples/human-decision-trigger.json --kind trigger
+```
+
 For Coordinator promotion, the project-owned adapter must pass the
 `AWG-SPEC-PROMOTION-GATE` specification and exact formal-check result before
 delegating the lifecycle mutation to Coordinator. The adapter is a preflight

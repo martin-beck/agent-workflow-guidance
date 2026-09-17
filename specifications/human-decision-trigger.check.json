@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-HUMAN-DECISION-TRIGGER",
+  "spec_version": 1,
+  "artifact_digest": "sha256:6ffe9758746122bdeb6c0a33edc01c8e8026b8d16925bb99ca0eb303a687920d",
+  "method": "state-machine",
+  "checker": "tools/check_spec.py",
+  "status": "pass",
+  "properties_checked": ["explicit activation", "revision binding", "fail-closed lifecycle", "clarification remains pending"],
+  "checked_at": "2026-09-18T12:00:00Z",
+  "evidence_digest": "sha256:6ffe9758746122bdeb6c0a33edc01c8e8026b8d16925bb99ca0eb303a687920d",
+  "scope": "offline trigger lifecycle",
+  "limitations": ["The checker does not launch a TUI or mutate Coordinator state."]
+}

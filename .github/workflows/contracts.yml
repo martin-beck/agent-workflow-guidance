@@ -22,8 +22,10 @@ jobs:
           python -m json.tool schema/decision-record.schema.json >/dev/null
           python -m json.tool schema/specification.schema.json >/dev/null
           python -m json.tool schema/formal-check-result.schema.json >/dev/null
+          python -m json.tool schema/human-decision-trigger.schema.json >/dev/null
           python -m json.tool examples/decision-request.json >/dev/null
           python -m json.tool examples/decision-record.json >/dev/null
+          python -m json.tool examples/human-decision-trigger.json >/dev/null
           python -m json.tool fixtures/broken/invalid-request.json >/dev/null
           python -m json.tool fixtures/broken/invalid-record.json >/dev/null
           python -m json.tool specifications/bootstrap-queue.json >/dev/null
@@ -78,6 +80,8 @@ jobs:
           python -m json.tool specifications/conceptual-authoring-gate.check.json >/dev/null
           python -m json.tool specifications/self-hosting-evolution.json >/dev/null
           python -m json.tool specifications/self-hosting-evolution.check.json >/dev/null
+          python -m json.tool specifications/human-decision-trigger.json >/dev/null
+          python -m json.tool specifications/human-decision-trigger.check.json >/dev/null
           python -m json.tool examples/evaluation-scenarios.json >/dev/null
           python -m json.tool fixtures/broken/invalid-evaluation-scenarios.json >/dev/null
           python -m json.tool examples/clarification-cases.json >/dev/null
@@ -139,6 +143,7 @@ jobs:
           python tools/check_spec.py specifications/awq-formal-evidence.json --result specifications/awq-formal-evidence.check.json
           python tools/check_spec.py specifications/conceptual-authoring-gate.json --result specifications/conceptual-authoring-gate.check.json
           python tools/check_spec.py specifications/self-hosting-evolution.json --result specifications/self-hosting-evolution.check.json
+          python tools/check_spec.py specifications/human-decision-trigger.json --result specifications/human-decision-trigger.check.json
           python tools/check_evaluation_plan.py examples/evaluation-scenarios.json
           ! python tools/check_evaluation_plan.py fixtures/broken/invalid-evaluation-scenarios.json
           python tools/check_clarification_gate.py examples/clarification-cases.json
@@ -174,6 +179,7 @@ jobs:
           ! python tools/check_autogen_migration.py fixtures/broken/invalid-autogen-migration-decision.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
+          python tools/check_contracts.py examples/human-decision-trigger.json --kind trigger
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
           python tools/check_request_gate.py examples/decision-request.json --phase implementation --task-revision 3
           python -m unittest discover -s tests -v

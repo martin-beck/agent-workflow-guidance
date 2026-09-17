@@ -43,6 +43,13 @@ class SpecificationCheckerTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("AWG-GATE-FAIL", result.stderr)
 
+    def test_human_decision_trigger_spec_passes(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "tools/check_spec.py"), "specifications/human-decision-trigger.json"],
+            cwd=ROOT, check=False, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

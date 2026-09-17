@@ -45,6 +45,15 @@ class ContractCheckerTests(unittest.TestCase):
         self.assertEqual(document["schema_version"], "0.2")
         self.assertEqual(self.run_checker(ROOT / "examples" / "decision-request.json", "request").returncode, 0)
 
+    def test_positive_human_decision_trigger(self) -> None:
+        result = self.run_checker(ROOT / "examples" / "human-decision-trigger.json", "trigger")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_negative_human_decision_trigger(self) -> None:
+        result = self.run_checker(ROOT / "fixtures" / "broken" / "invalid-human-decision-trigger.json", "trigger")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("AWG-CONTRACT-FAIL", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
