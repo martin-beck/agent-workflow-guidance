@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CONCEPTUAL-AUTHORING-GATE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Require specification-first evidence when authoring or opening design and conceptual ARs, while retaining a bounded lighter method for operational ARs.",
+  "scope": ["AR authoring envelope", "decision class", "task revision", "specification digest", "formal-check result", "checker limitations", "safe references"],
+  "assumptions": ["The Coordinator remains the lifecycle authority", "The product formal checker is deterministic and offline"],
+  "unknowns": ["Different operational ARs may require different lighter formal methods"],
+  "state_variables": ["draft AR", "decision class", "evidence envelope", "authoring disposition", "Coordinator revision"],
+  "transitions": ["draft -> classified", "classified -> evidence-bound", "evidence-bound -> open", "evidence-bound -> rejected"],
+  "invariants": ["Design and conceptual ARs cannot open without exact specification and passed-check evidence", "Evidence binds to the Coordinator task revision", "Checker limitations are recorded and do not become implementation claims", "Unsafe references and stale digests fail closed", "Operational ARs still carry a bounded specification"],
+  "acceptance_predicates": ["A complete conceptual envelope is accepted", "Missing fields, stale revision, failed result, digest mismatch, and path escape are rejected", "A lighter operational envelope is accepted only with its bounded method and limitations", "The gate does not mutate Coordinator authority"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/conceptual-authoring-gate.json", "checker": "tools/check_spec.py plus state authoring checker", "command": ["python", "tools/check_spec.py", "specifications/conceptual-authoring-gate.json"], "scope": "specification-first AR authoring lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["draft", "classified", "evidence-bound", "open", "rejected"], "initial": "draft", "transitions": [{"from": "draft", "to": "classified"}, {"from": "classified", "to": "evidence-bound"}, {"from": "evidence-bound", "to": "open"}, {"from": "evidence-bound", "to": "rejected"}], "forbidden_transitions": [{"from": "draft", "to": "open"}, {"from": "classified", "to": "open"}, {"from": "rejected", "to": "open"}]}}
+}
