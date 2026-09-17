@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "specification_ref": "specifications/clarification-regret-gate.json",
+  "cases": [
+    {"id":"C-001","alternatives":["keep-api","change-api"],"applicability_confidence":0.97,"ambiguity":0.35,"downstream_impact":0.9,"harm_if_wrong":0.9,"intervention_cost":0.05,"material_ambiguity":true,"ambiguity_resolved":false,"question_scope":"Should the existing public API remain backward compatible?","expected_decision":"clarify"},
+    {"id":"C-002","alternatives":["rename-local","keep-local"],"applicability_confidence":0.91,"ambiguity":0.05,"downstream_impact":0.1,"harm_if_wrong":0.2,"intervention_cost":0.2,"material_ambiguity":false,"ambiguity_resolved":true,"question_scope":"Confirm whether the private local symbol may be renamed.","expected_decision":"act"},
+    {"id":"C-003","alternatives":["safe-default","risky-default"],"applicability_confidence":0.62,"ambiguity":0.8,"downstream_impact":0.7,"harm_if_wrong":0.8,"intervention_cost":0.1,"material_ambiguity":false,"ambiguity_resolved":false,"question_scope":"Which default should dependent tasks inherit?","expected_decision":"clarify"},
+    {"id":"C-004","alternatives":["document","implement"],"applicability_confidence":0.88,"ambiguity":0.1,"downstream_impact":0.2,"harm_if_wrong":0.2,"intervention_cost":0.2,"material_ambiguity":true,"ambiguity_resolved":true,"question_scope":"Is documentation sufficient for this non-binding note?","expected_decision":"act"}
+  ]
+}
