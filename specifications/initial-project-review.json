@@ -1,0 +1,15 @@
+{
+  "schema_version":"0.2",
+  "spec_id":"AWG-SPEC-INITIAL-PROJECT-REVIEW",
+  "version":1,
+  "decision_class":"conceptual",
+  "objective":"Require explicit user review of the decomposed work plan, dependency graph, AR manifest, and concise design document before implementation ARs proceed.",
+  "scope":["task revision","before and after planning artifacts","user review disposition","implementation readiness"],
+  "assumptions":["Coordinator owns task lifecycle and revisions","AWG stores bounded public references rather than private transcripts","AWQ checks evidence shape"],
+  "unknowns":["Projects may choose their own planning-document formats"],
+  "state_variables":["draft","artifacts-bound","reviewed","changes-requested","implementation-ready"],
+  "transitions":["draft -> artifacts-bound","artifacts-bound -> reviewed","artifacts-bound -> changes-requested","reviewed -> implementation-ready","changes-requested -> artifacts-bound"],
+  "invariants":["All four planning artifacts have versioned before and after references","Review is bound to the exact Coordinator task revision","Implementation readiness requires an explicit approve or reject disposition","A missing or stale artifact or absent review fails closed","User approval does not prove implementation correctness"],
+  "acceptance_predicates":["A complete reviewed envelope passes","Missing review, missing artifact, stale revision, and implicit approval reject","A requested-change disposition remains non-ready"],
+  "formalization":{"method":"state-machine","model_ref":"specifications/initial-project-review.json","checker":"state/tools/check_planning_review.py plus tools/check_spec.py","command":["python","tools/check_planning_review.py","integration/planning-review-positive.json"],"scope":"finite planning-review envelope","expected_result":"invariants-hold","timeout_seconds":60,"model":{"states":["draft","artifacts-bound","reviewed","changes-requested","implementation-ready"],"initial":"draft","transitions":[{"from":"draft","to":"artifacts-bound"},{"from":"artifacts-bound","to":"reviewed"},{"from":"artifacts-bound","to":"changes-requested"},{"from":"reviewed","to":"implementation-ready"},{"from":"changes-requested","to":"artifacts-bound"}],"forbidden_transitions":[{"from":"draft","to":"implementation-ready"},{"from":"artifacts-bound","to":"implementation-ready"},{"from":"changes-requested","to":"implementation-ready"}]}}
+}
