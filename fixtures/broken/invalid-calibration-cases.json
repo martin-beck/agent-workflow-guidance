@@ -1,0 +1,1 @@
+{"schema_version":1,"specification_ref":"specifications/calibration-dimensions.json","thresholds":{"downstream_escalation_confidence":0.5,"maximum_dimension_mae":0.25},"cases":[{"id":"K-001","confidence":0.9,"label":1,"expected_escalation":false}]}

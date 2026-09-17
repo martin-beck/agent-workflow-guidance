@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "specification_ref": "specifications/calibration-dimensions.json",
+  "thresholds": {"downstream_escalation_confidence": 0.5, "maximum_dimension_mae": 0.3},
+  "cases": [
+    {"id":"K-001","applicability_confidence":0.9,"outcome_confidence":0.8,"downstream_impact_confidence":0.3,"applicability_label":1,"outcome_label":1,"downstream_impact_label":0,"expected_escalation":true},
+    {"id":"K-002","applicability_confidence":0.7,"outcome_confidence":0.6,"downstream_impact_confidence":0.8,"applicability_label":1,"outcome_label":1,"downstream_impact_label":1,"expected_escalation":false},
+    {"id":"K-003","applicability_confidence":0.2,"outcome_confidence":0.4,"downstream_impact_confidence":0.4,"applicability_label":0,"outcome_label":0,"downstream_impact_label":0,"expected_escalation":true},
+    {"id":"K-004","applicability_confidence":0.8,"outcome_confidence":0.9,"downstream_impact_confidence":0.7,"applicability_label":1,"outcome_label":1,"downstream_impact_label":1,"expected_escalation":false}
+  ]
+}
