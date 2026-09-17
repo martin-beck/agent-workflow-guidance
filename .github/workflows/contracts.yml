@@ -72,6 +72,8 @@ jobs:
           python -m json.tool specifications/anti-rubber-stamp.check.json >/dev/null
           python -m json.tool specifications/future-autonomy-evidence.json >/dev/null
           python -m json.tool specifications/future-autonomy-evidence.check.json >/dev/null
+          python -m json.tool specifications/awq-formal-evidence.json >/dev/null
+          python -m json.tool specifications/awq-formal-evidence.check.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -97,6 +99,7 @@ jobs:
           python tools/check_spec.py specifications/reusable-guidance-lifecycle.json --result specifications/reusable-guidance-lifecycle.check.json
           python tools/check_spec.py specifications/anti-rubber-stamp.json --result specifications/anti-rubber-stamp.check.json
           python tools/check_spec.py specifications/future-autonomy-evidence.json --result specifications/future-autonomy-evidence.check.json
+          python tools/check_spec.py specifications/awq-formal-evidence.json --result specifications/awq-formal-evidence.check.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
