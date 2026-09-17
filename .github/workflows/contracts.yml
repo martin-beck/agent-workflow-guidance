@@ -97,6 +97,8 @@ jobs:
           python -m json.tool fixtures/broken/invalid-swe-agent-governance-cases.json >/dev/null
           python -m json.tool examples/hitl-transfer-terms.json >/dev/null
           python -m json.tool fixtures/broken/invalid-hitl-transfer-terms.json >/dev/null
+          python -m json.tool examples/role-separation-cases.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-role-separation-cases.json >/dev/null
           python -m json.tool examples/autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-autogen-migration-decision.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
@@ -146,6 +148,8 @@ jobs:
           ! python tools/check_swe_agent_governance.py fixtures/broken/invalid-swe-agent-governance-cases.json
           python tools/check_hitl_transfer.py examples/hitl-transfer-terms.json
           ! python tools/check_hitl_transfer.py fixtures/broken/invalid-hitl-transfer-terms.json
+          python tools/check_role_separation.py examples/role-separation-cases.json
+          ! python tools/check_role_separation.py fixtures/broken/invalid-role-separation-cases.json
           python tools/check_autogen_migration.py examples/autogen-migration-decision.json
           ! python tools/check_autogen_migration.py fixtures/broken/invalid-autogen-migration-decision.json
           python tools/check_contracts.py examples/decision-request.json --kind request

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "cases": [{"id": "approval-skips-review", "records": [
+    {"kind": "recommendation", "id": "r", "predecessor": null, "status": "plausible"},
+    {"kind": "oracle_decision", "id": "d", "predecessor": "r", "status": "approved"},
+    {"kind": "independent_review", "id": "v", "predecessor": "d", "status": "pass"}
+  ]}]
+}
