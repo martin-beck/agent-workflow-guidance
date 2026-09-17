@@ -117,7 +117,11 @@ def validate(value: Any, schema: dict[str, Any], root_schema: dict[str, Any], sc
 
 
 def schema_for(kind: str, schema_dir: Path) -> tuple[dict[str, Any], Path]:
-    names = {"request": "decision-request.schema.json", "record": "decision-record.schema.json"}
+    names = {
+        "request": "decision-request.schema.json",
+        "record": "decision-record.schema.json",
+        "trigger": "human-decision-trigger.schema.json",
+    }
     schema = load_json(schema_dir / names[kind])
     if not isinstance(schema, dict):
         raise ContractError("schema root is not an object")
@@ -127,7 +131,7 @@ def schema_for(kind: str, schema_dir: Path) -> tuple[dict[str, Any], Path]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("contract", type=Path)
-    parser.add_argument("--kind", choices=("request", "record"), required=True)
+    parser.add_argument("--kind", choices=("request", "record", "trigger"), required=True)
     parser.add_argument("--schema-dir", type=Path, default=Path(__file__).parent.parent / "schema")
     args = parser.parse_args()
     try:

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "task_ref": "AR-EXAMPLE",
+  "task_revision": 3,
+  "interaction_required": false,
+  "activation": "agent-guessing",
+  "decision_status": "pending",
+  "reason": "missing explicit activation contract",
+  "requested_by": "agent",
+  "tui_contract_version": "0.1"
+}

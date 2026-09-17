@@ -27,6 +27,18 @@ implementation begins if task revision, repository head, policy lock, or
 specification digest changes. A failed, missing, stale, or inconclusive check
 causes a fail-closed stop; it may not be overridden by an oracle approval.
 
+### Opening a human session
+
+The decision request's optional `human_interaction` member is mandatory for a
+Coordinator-to-TUI handoff. It is a revision-bound trigger, not a free-form
+tag. Use `user-decision` for an explicit choice, `user-detail-request` when
+the user asks to inspect or clarify a design/work-plan section,
+`user-proposal-review` when the user asks to compare agent proposals, and
+`agent-uncertainty` when the agent cannot safely choose among materially
+different options. `policy-required-approval` covers mandatory gates even if
+the agent is confident. A missing or stale trigger must not start a TUI
+session.
+
 The checker records compact evidence, not hidden model reasoning or private
 transcripts. See [Formal specifications](FORMAL_SPECIFICATION.md) and
 `schema/specification.schema.json`.
