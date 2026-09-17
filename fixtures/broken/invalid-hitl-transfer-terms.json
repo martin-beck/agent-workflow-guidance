@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "behavioral_transfer_claim": true,
+  "terms": [{"term": "confidence", "source_meaning": "reward", "awg_meaning": "approval", "disposition": "transferred", "counterexample": "none"}]
+}
