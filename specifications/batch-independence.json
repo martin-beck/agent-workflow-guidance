@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-BATCH-INDEPENDENCE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify independent and coupled oracle batches so a response to one decision cannot silently authorize another.",
+  "scope": ["single-item packet", "independent batch", "coupled batch", "partial response", "authorization binding"],
+  "assumptions": ["Each decision item has a stable identity", "Coupled items declare their dependency explicitly"],
+  "unknowns": ["Oracle workload and batching benefit require evaluation"],
+  "state_variables": ["item identities", "batch relation", "responses", "unanswered items", "authorization set"],
+  "transitions": ["unbatched -> packetized", "packetized -> partially-answered", "partially-answered -> item-authorized", "item-authorized -> completed"],
+  "invariants": ["An item response authorizes only its declared item set", "Independent items do not inherit responses", "Unanswered items remain unresolved", "Coupled dependencies are visible in the packet"],
+  "acceptance_predicates": ["Single-item, independent, and coupled fixtures are distinguishable", "A partial response cannot complete an unanswered item", "Silent cross-item authorization fails", "Batch relation is persisted with the decision"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/batch-independence.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/batch-independence.json"], "scope": "offline batched decision lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["unbatched", "packetized", "partially-answered", "item-authorized", "completed"], "initial": "unbatched", "transitions": [{"from": "unbatched", "to": "packetized"}, {"from": "packetized", "to": "partially-answered"}, {"from": "partially-answered", "to": "item-authorized"}, {"from": "item-authorized", "to": "completed"}], "forbidden_transitions": [{"from": "unbatched", "to": "completed"}, {"from": "partially-answered", "to": "completed"}]}}
+}

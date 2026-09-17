@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-ANTI-RUBBER-STAMP",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify alternative coverage, evidence gaps, framing, and rejection affordance predicates that prevent rubber-stamp oracle decisions.",
+  "scope": ["alternatives", "evidence gaps", "framing", "rejection affordance", "oracle authority"],
+  "assumptions": ["The packet can expose omissions and material alternatives", "The oracle can reject or request clarification"],
+  "unknowns": ["Human decision quality requires empirical evaluation"],
+  "state_variables": ["candidate set", "evidence coverage", "framing", "oracle response", "review result"],
+  "transitions": ["draft -> alternatives-covered", "alternatives-covered -> evidence-audited", "evidence-audited -> oracle-decided", "oracle-decided -> independently-reviewed"],
+  "invariants": ["Material alternatives cannot be hidden", "Evidence gaps are visible", "The oracle can reject and request clarification", "A plausible packet is not sufficient evidence of informed approval"],
+  "acceptance_predicates": ["A hidden-material-alternative fixture fails", "Missing evidence is surfaced", "Rejection and clarification are valid dispositions", "Authority and context are recorded"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/anti-rubber-stamp.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/anti-rubber-stamp.json"], "scope": "offline oracle decision quality lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["draft", "alternatives-covered", "evidence-audited", "oracle-decided", "independently-reviewed"], "initial": "draft", "transitions": [{"from": "draft", "to": "alternatives-covered"}, {"from": "alternatives-covered", "to": "evidence-audited"}, {"from": "evidence-audited", "to": "oracle-decided"}, {"from": "oracle-decided", "to": "independently-reviewed"}], "forbidden_transitions": [{"from": "draft", "to": "oracle-decided"}, {"from": "alternatives-covered", "to": "oracle-decided"}]}}
+}
