@@ -1,0 +1,1 @@
+{"journal_id":"journal-1","revision":2,"status":"saved","points":[{"id":"p1","proposals":["A","B"],"response":{"disposition":"select"}}],"future_requests":[{"classification":"new-ar","ar_ref":"AR-0042","reason":"capture persistence follow-up"}]}
