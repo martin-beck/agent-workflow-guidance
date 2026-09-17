@@ -1,0 +1,1 @@
+{"schema_version":1,"specification_ref":"specifications/bounded-authority.json","cases":[{"id":"A-BAD","task_id":"AR-BAD","requested_scope":["src"],"approved_scope":["src","secrets"],"current_tick":12,"expiry_tick":10,"alternatives_count":1,"context_present":false,"rejection_allowed":false,"disposition":"approved","audit_fields":[]}]}

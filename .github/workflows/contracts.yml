@@ -86,6 +86,8 @@ jobs:
           python -m json.tool fixtures/broken/invalid-calibration-cases.json >/dev/null
           python -m json.tool examples/mixed-initiative-cases.json >/dev/null
           python -m json.tool fixtures/broken/invalid-mixed-initiative-cases.json >/dev/null
+          python -m json.tool examples/authority-cases.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-authority-cases.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -122,6 +124,8 @@ jobs:
           ! python tools/check_calibration.py fixtures/broken/invalid-calibration-cases.json
           python tools/check_mixed_initiative.py examples/mixed-initiative-cases.json
           ! python tools/check_mixed_initiative.py fixtures/broken/invalid-mixed-initiative-cases.json
+          python tools/check_authority.py examples/authority-cases.json
+          ! python tools/check_authority.py fixtures/broken/invalid-authority-cases.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
