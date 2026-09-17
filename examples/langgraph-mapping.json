@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "external_project":"LangGraph",
+  "external_repository":"langchain-ai/langgraph",
+  "external_revision":"230927fb3a9ac9b2893a30322b4dfea7cdea9a8f",
+  "runtime_dependency":false,
+  "runtime_integration_claim":false,
+  "privacy_boundary":["no raw transcript","no credentials","no provider call","synthetic checkpoint only"],
+  "mappings":[
+    {"external":"checkpoint.thread_id","awg":"execution_id","invariant":"resume identity matches"},
+    {"external":"interrupt.payload","awg":"decision_request","invariant":"request is not authorization"},
+    {"external":"human.response","awg":"oracle_decision","invariant":"decision binds packet revision"},
+    {"external":"resume.input","awg":"continuation","invariant":"stale checkpoint or decision rejects"}
+  ]
+}

@@ -89,6 +89,8 @@ jobs:
           python -m json.tool examples/authority-cases.json >/dev/null
           python -m json.tool fixtures/broken/invalid-authority-cases.json >/dev/null
           python -m json.tool examples/public-project-matrix.json >/dev/null
+          python -m json.tool examples/langgraph-mapping.json >/dev/null
+          python -m json.tool fixtures/broken/invalid-langgraph-mapping.json >/dev/null
           python -m json.tool fixtures/broken/invalid-spec.json >/dev/null
           python -m json.tool fixtures/broken/invalid-formal-check.json >/dev/null
           python tools/check_spec.py specifications/bootstrap-queue.json --result specifications/bootstrap-queue.check.json
@@ -128,6 +130,8 @@ jobs:
           python tools/check_authority.py examples/authority-cases.json
           ! python tools/check_authority.py fixtures/broken/invalid-authority-cases.json
           python tools/check_public_project_matrix.py examples/public-project-matrix.json
+          python tools/check_langgraph_mapping.py examples/langgraph-mapping.json
+          ! python tools/check_langgraph_mapping.py fixtures/broken/invalid-langgraph-mapping.json
           python tools/check_contracts.py examples/decision-request.json --kind request
           python tools/check_contracts.py examples/decision-record.json --kind record
           python tools/check_request_gate.py examples/decision-request.json --phase oracle
