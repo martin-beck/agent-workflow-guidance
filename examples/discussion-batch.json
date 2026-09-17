@@ -1,0 +1,1 @@
+{"session_id":"synthetic-batch-1","queries":1,"points":[{"id":"p1","proposals":["A","B"],"implications":"A preserves independence","response":{"point_id":"p1","authorized":true}},{"id":"p2","proposals":["C","D"],"implications":"C reduces coupling","response":{"point_id":"p2","added_proposal":{"value":"E","evaluated":true}}}]}
