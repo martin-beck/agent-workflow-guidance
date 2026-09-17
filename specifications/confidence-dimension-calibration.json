@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-CONFIDENCE-DIMENSION-CALIBRATION",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define acceptance predicates for separate applicability, outcome, and downstream-impact confidence dimensions.",
+  "scope": ["applicability calibration", "outcome calibration", "downstream-impact calibration", "non-collapsed decision evidence"],
+  "assumptions": ["Different confidence dimensions can disagree", "Calibration labels are recorded independently"],
+  "unknowns": ["Thresholds and decision-value weights require empirical study"],
+  "state_variables": ["three confidence values", "three observed labels", "calibration result", "decision disposition"],
+  "transitions": ["unmeasured -> dimension-scored", "dimension-scored -> calibrated", "calibrated -> escalated", "calibrated -> eligible"],
+  "invariants": ["No single collapsed score replaces the three dimensions", "Applicability, outcome, and downstream impact use separate labels", "Eligibility requires all required dimensions and limitations"],
+  "acceptance_predicates": ["A disagreement between dimensions is representable", "A collapsed-only fixture fails", "Each dimension has a calibration measure", "Thresholds are marked as unvalidated until empirical evidence exists"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/confidence-dimension-calibration.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/confidence-dimension-calibration.json"], "scope": "offline confidence calibration acceptance lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["unmeasured", "dimension-scored", "calibrated", "escalated", "eligible"], "initial": "unmeasured", "transitions": [{"from": "unmeasured", "to": "dimension-scored"}, {"from": "dimension-scored", "to": "calibrated"}, {"from": "calibrated", "to": "escalated"}, {"from": "calibrated", "to": "eligible"}], "forbidden_transitions": [{"from": "unmeasured", "to": "eligible"}, {"from": "dimension-scored", "to": "eligible"}]}}
+}

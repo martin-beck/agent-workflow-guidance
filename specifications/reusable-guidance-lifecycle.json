@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-REUSABLE-GUIDANCE-LIFECYCLE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Specify scope matching, expiry, counterexamples, and explicit revalidation for reusable oracle guidance.",
+  "scope": ["guidance scope", "expiry", "repository context", "counterexample", "revalidation"],
+  "assumptions": ["Guidance carries provenance and applicability conditions", "A changed repository can invalidate prior applicability"],
+  "unknowns": ["Expiry duration depends on project volatility and risk"],
+  "state_variables": ["guidance record", "scope match", "age", "repository change", "revalidation result"],
+  "transitions": ["created -> scoped", "scoped -> reusable", "reusable -> expired", "reusable -> invalidated", "expired -> revalidated", "invalidated -> revalidated"],
+  "invariants": ["Expired or invalidated guidance cannot authorize action", "Scope matching is explicit", "Counterexamples and repository changes trigger revalidation", "Reuse preserves provenance"],
+  "acceptance_predicates": ["Stale guidance fails closed", "A changed-context fixture requires revalidation", "A counterexample invalidates over-generalized guidance", "Successful revalidation creates a new bound record"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/reusable-guidance-lifecycle.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/reusable-guidance-lifecycle.json"], "scope": "offline reusable guidance lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["created", "scoped", "reusable", "expired", "invalidated", "revalidated"], "initial": "created", "transitions": [{"from": "created", "to": "scoped"}, {"from": "scoped", "to": "reusable"}, {"from": "reusable", "to": "expired"}, {"from": "reusable", "to": "invalidated"}, {"from": "expired", "to": "revalidated"}, {"from": "invalidated", "to": "revalidated"}], "forbidden_transitions": [{"from": "created", "to": "reusable"}, {"from": "expired", "to": "reusable"}, {"from": "invalidated", "to": "reusable"}]}}
+}

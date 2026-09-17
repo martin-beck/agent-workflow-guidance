@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.2",
+  "spec_id": "AWG-SPEC-FUTURE-AUTONOMY-EVIDENCE",
+  "version": 1,
+  "decision_class": "design",
+  "objective": "Define the evidence boundary for allowing a later task to proceed without an oracle.",
+  "scope": ["prior decision", "correction history", "confidence calibration", "execution evidence", "outcome evidence", "safety evidence"],
+  "assumptions": ["Intervention frequency is not a sufficient success metric", "Later autonomy is scoped to a task class and context"],
+  "unknowns": ["Predictive validity requires longitudinal evaluation"],
+  "state_variables": ["task class", "prior records", "calibration", "execution outcome", "safety result", "autonomy disposition"],
+  "transitions": ["candidate -> history-bound", "history-bound -> calibrated", "calibrated -> outcome-evidenced", "outcome-evidenced -> safety-reviewed", "safety-reviewed -> oracle-free-eligible"],
+  "invariants": ["Fewer interventions cannot alone establish eligibility", "Outcome and safety evidence are required", "Evidence is scoped to the task class and context", "Corrections and failures remain part of the record"],
+  "acceptance_predicates": ["A low-intervention but unsafe fixture fails", "Calibration and outcome evidence are separate", "Safety review gates oracle-free eligibility", "Eligibility expires when scope or context changes"],
+  "formalization": {"method": "state-machine", "model_ref": "specifications/future-autonomy-evidence.json", "checker": "tools/check_spec.py", "command": ["python", "tools/check_spec.py", "specifications/future-autonomy-evidence.json"], "scope": "offline future-autonomy evidence lifecycle", "expected_result": "invariants-hold", "timeout_seconds": 60, "model": {"states": ["candidate", "history-bound", "calibrated", "outcome-evidenced", "safety-reviewed", "oracle-free-eligible"], "initial": "candidate", "transitions": [{"from": "candidate", "to": "history-bound"}, {"from": "history-bound", "to": "calibrated"}, {"from": "calibrated", "to": "outcome-evidenced"}, {"from": "outcome-evidenced", "to": "safety-reviewed"}, {"from": "safety-reviewed", "to": "oracle-free-eligible"}], "forbidden_transitions": [{"from": "candidate", "to": "oracle-free-eligible"}, {"from": "calibrated", "to": "oracle-free-eligible"}]}}
+}
