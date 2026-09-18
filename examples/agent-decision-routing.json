@@ -19,8 +19,10 @@
     "tui_contract_version": "1.0"
   },
   "tui_route": {
-    "channel": "workflow-tui",
+    "channel": "workflow-ui",
     "request_ref": "AWG-EXAMPLE-DECISION",
-    "host_direct_question_forbidden": true
+    "host_direct_question_forbidden": true,
+    "preferred_backend": "gui",
+    "fallback_backend": "tui"
   }
 }

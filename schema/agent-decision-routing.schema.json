@@ -27,11 +27,13 @@
     "tui_route": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["channel", "request_ref", "host_direct_question_forbidden"],
+      "required": ["channel", "request_ref", "host_direct_question_forbidden", "preferred_backend", "fallback_backend"],
       "properties": {
-        "channel": {"const": "workflow-tui"},
+        "channel": {"const": "workflow-ui"},
         "request_ref": {"type": "string", "pattern": "^AWG-[A-Z0-9-]+$"},
-        "host_direct_question_forbidden": {"const": true}
+        "host_direct_question_forbidden": {"const": true},
+        "preferred_backend": {"const": "gui"},
+        "fallback_backend": {"const": "tui"}
       }
     }
   }
