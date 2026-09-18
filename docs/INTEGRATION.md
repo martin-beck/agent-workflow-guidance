@@ -55,6 +55,11 @@ transitions the trigger to `resolved`, `superseded`, or `cancelled` and writes
 the selected proposal, clarification, or user-authored proposal into the AR
 record/specification.
 
+This routing is mandatory for important decisions. See
+`docs/DECISION_ROUTING.md` and `schema/agent-decision-routing.schema.json`.
+The host-agent conversation is only a transport handoff: a direct question in
+that conversation is prohibited and cannot authorize an AR.
+
 Validate a standalone trigger offline with:
 
 ```text
