@@ -13,10 +13,11 @@ data-model, migration, or dependency consequences. The agent must classify the
 decision before implementation; confidence does not waive this rule.
 
 The routing record is `schema/agent-decision-routing.schema.json`. It binds the
-human trigger and request reference to `channel: workflow-tui` and explicitly
-forbids a direct host-interface question. The TUI handoff may be shown in the
-host interface, but it contains only session status and how to attach; it must
-not ask for, accept, or imply the authoritative choice there.
+human trigger and request reference to `channel: workflow-ui`, requests the
+GUI backend first, and declares the TUI as the fallback. It explicitly forbids
+a direct host-interface question. The UI handoff may be shown in the host
+interface, but it contains only session status and how to attach; it must not
+ask for, accept, or imply the authoritative choice there.
 
 Agents should finish safe, independent ARs first, then batch independent
 requests. Every item remains independently revision-bound and unanswered items
