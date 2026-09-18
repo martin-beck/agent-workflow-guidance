@@ -121,6 +121,7 @@ def schema_for(kind: str, schema_dir: Path) -> tuple[dict[str, Any], Path]:
         "request": "decision-request.schema.json",
         "record": "decision-record.schema.json",
         "trigger": "human-decision-trigger.schema.json",
+        "routing": "agent-decision-routing.schema.json",
     }
     schema = load_json(schema_dir / names[kind])
     if not isinstance(schema, dict):
@@ -131,7 +132,7 @@ def schema_for(kind: str, schema_dir: Path) -> tuple[dict[str, Any], Path]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("contract", type=Path)
-    parser.add_argument("--kind", choices=("request", "record", "trigger"), required=True)
+    parser.add_argument("--kind", choices=("request", "record", "trigger", "routing"), required=True)
     parser.add_argument("--schema-dir", type=Path, default=Path(__file__).parent.parent / "schema")
     args = parser.parse_args()
     try:

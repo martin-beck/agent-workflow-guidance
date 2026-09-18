@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "assessment": {
+    "importance": "important",
+    "reason_codes": ["design-choice"],
+    "user_authority_required": true,
+    "continue_independent_work": true
+  },
+  "human_interaction": {
+    "schema_version": "1.0",
+    "task_ref": "AR-EXAMPLE",
+    "task_revision": 3,
+    "interaction_required": true,
+    "activation": "user-decision",
+    "decision_status": "pending",
+    "reason": "Needs a choice.",
+    "requested_by": "agent",
+    "decision_request_ref": "AWG-EXAMPLE-DECISION",
+    "tui_contract_version": "1.0"
+  },
+  "tui_route": {
+    "channel": "codex-host",
+    "request_ref": "AWG-EXAMPLE-DECISION",
+    "host_direct_question_forbidden": false
+  }
+}

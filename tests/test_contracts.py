@@ -54,6 +54,15 @@ class ContractCheckerTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("AWG-CONTRACT-FAIL", result.stderr)
 
+    def test_positive_mandatory_routing(self) -> None:
+        result = self.run_checker(ROOT / "examples" / "agent-decision-routing.json", "routing")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_direct_host_route_is_rejected(self) -> None:
+        result = self.run_checker(ROOT / "fixtures" / "broken" / "invalid-agent-decision-routing.json", "routing")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("AWG-CONTRACT-FAIL", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
