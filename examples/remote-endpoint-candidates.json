@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "kind": "remote-endpoint-candidates",
+  "project_id": "demo",
+  "task_ref": "AR-0123",
+  "task_revision": 2,
+  "generated_at": "2026-09-25T21:00:00Z",
+  "candidates": [{
+    "candidate_id": "ssh-relay-demo01",
+    "host": "relay.example",
+    "port": 22,
+    "address_family": "name",
+    "provenance": "relay",
+    "priority": 10,
+    "host_key_fingerprints": ["SHA256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+  }]
+}
