@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "kind": "remote-ssh-enrollment",
+  "project_id": "demo",
+  "task_ref": "AR-0121",
+  "task_revision": 2,
+  "enrollment_id": "enrollment-demo-012345",
+  "device_id": "android-demo01",
+  "device_public_key": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBdemo-public-key-material",
+  "consent": true,
+  "host_key_fingerprint": "SHA256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "forwarding": {"host": "127.0.0.1", "port": 43127, "scope": "workflow-service"},
+  "status": "active",
+  "expires_at": "2026-09-26T21:00:00Z"
+}
